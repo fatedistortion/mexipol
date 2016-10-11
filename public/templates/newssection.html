@@ -13,37 +13,28 @@
                 </div>
                 <div class="media-body  ">
                     <p class="text-left">{{posts[postIndex].message}}</p>
-                </div>        
+                </div>
             </div>
         </div>
-        <a href="https://www.facebook.com/mexipol" target="_blank">
-            <img class="sign" src="../img/FACEBOOKWatermark.png" />
-        </a>
     </div>
     <div class="" ng-show="postType == 2">
         <!-- Type1 is message-->
         <div class="row">
-                 <div class="col-md-6 col-md-offset-3">
-                    <p class="text-justify">{{posts[postIndex].message}}</p>
-                </div>
+             <div class="col-md-6 col-md-offset-3">
+                <p class="text-justify">{{posts[postIndex].message}}</p>
+            </div>
          </div>
-        <a href="https://www.facebook.com/mexipol" target="_blank">
-            <img class="sign" src="../img/FACEBOOKWatermark.png" />
-        </a>
     </div>
     <div class="" ng-show="postType == 3">
         <!-- Type1 is image / message-->
-            <div class="media row">
-                <div class="media-left media-middle">
-                    <img class="center-block" ng-src="{{posts[postIndex].picture}}" style="border: #398A8F solid 2px; border-radius:4px;">
-                </div>
-                <div class="media-body">
-                    <h2> {{Header}}</h2>
-                    <p><a ng-href="{{taglineLink}}"> {{newsLink}}</a> </p>
-                </div>
+        <div class="media row">
+            <div class="media-left media-middle">
+                <img class="center-block" ng-src="{{posts[postIndex].picture}}" style="border: #398A8F solid 2px; border-radius:4px;">
             </div>
-        <a href="https://www.facebook.com/mexipol" target="_blank">
-            <img class="sign" src="../img/FACEBOOKWatermark.png" />
-        </a>
+            <div class="media-body">
+                <h2> {{Header}}</h2>
+                <p><a ng-href="{{taglineLink}}"> {{newsLink}}</a> </p>
+            </div>
+        </div>
     </div>
 </section>
