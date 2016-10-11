@@ -1,11 +1,11 @@
 /* ! normalize.css v1.0.0 | MIT License | git.io/normalize */
- 
+
 /* ==========================================================================
 HTML5 display definitions
 ========================================================================== */
- 
+
 /* * Corrects `block` display not defined in IE 6/7/8/9 and Firefox 3. */
- 
+
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary { display: block; }
 /* * Corrects `inline-block` display not defined in IE 6/7/8/9 and Firefox 3. */
 audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
@@ -22,21 +22,21 @@ Base
 *    `em` units.
 * 2. Prevents iOS text size adjust after orientation change, without disabling
 *    user zoom. */
- 
+
 html { font-size: 100%; /* 1 */
 	-webkit-text-size-adjust: 100%; /* 2 */
 -ms-text-size-adjust: 100%; /* 2 */ }
 html, html a { -webkit-font-smoothing: antialiased; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004); }
 /* * Addresses `font-family` inconsistency between `textarea` and other form
 * elements. */
-html, button, input, select, textarea { font-family: 'Varela Round', sans-serif; }
+html, input, select, textarea { font-family: 'Varela Round', sans-serif; }
 /* * Addresses margins handled incorrectly in IE 6/7. */
 body { margin: 0; font-family: 'Rajdhani', sans-serif; font-weight:500; }
 /* ==========================================================================
 Links
 ========================================================================== */
 /* * Addresses `outline` inconsistency between Chrome and other browsers. */
- 
+
 a:focus { outline: thin dotted; }
 /* * Improves readability when focused and also mouse hovered in all browsers. */
 a:active, a:hover { outline: 0; }
@@ -45,7 +45,7 @@ Typography
 ========================================================================== */
 /* * Addresses font sizes and margins set differently in IE 6/7.
 * Addresses font sizes within `section` and `article` in Firefox 4+, Safari 5, * and Chrome. */
- 
+
 h1 { font-size: 2.2em; margin: 0.67em 0; color: #353535; }
 h2 { font-size: 1.7em; margin: 0.83em 0; }
 h3 { font-size: 1.2em; margin: 1em 0; }
@@ -80,7 +80,7 @@ sub { bottom: -0.25em; }
 Lists
 ========================================================================== */
 /* * Addresses margins set differently in IE 6/7. */
- 
+
 dl, menu, ol, ul { margin: 1em 0; }
 dd { margin: 0 0 0 40px; }
 /* * Addresses paddings set differently in IE 6/7. */
@@ -92,7 +92,7 @@ Embedded content
 ========================================================================== */
 /* * 1. Removes border when inside `a` element in IE 6/7/8/9 and Firefox 3.
 * 2. Improves image quality when scaled in IE 7. */
- 
+
 img { border: 0; /* 1 */
 -ms-interpolation-mode: bicubic; /* 2 */ }
 /* * Corrects overflow displayed oddly in IE 9. */
@@ -101,13 +101,13 @@ svg:not(:root) { overflow: hidden; }
 Figures
 ========================================================================== */
 /* * Addresses margin not present in IE 6/7/8/9, Safari 5, and Opera 11. */
- 
+
 figure { margin: 0; }
 /* ==========================================================================
 Forms
 ========================================================================== */
 /* * Corrects margin displayed oddly in IE 6/7. */
- 
+
 form { margin: 0; }
 /* * Define consistent border, margin, and padding. */
 
@@ -238,7 +238,7 @@ Aplicaciones Section
 .fluid { width: 50%; background: transparent; float: right; height: 100%; z-index: 2; }
 .responsive-services { position: relative; }
 /* ==========================================================================
-Swag (La imágen Di...)
+Swag (La imï¿½gen Di...)
 ========================================================================== */
 .swag { background: url('../img/plants-bg.jpg') no-repeat center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; background-attachment: fixed; padding: 50px 0; }
 .swag h1 { color: #fff; font-size: 40px; text-transform: uppercase; letter-spacing: 5px; }
@@ -266,9 +266,9 @@ a.expand { display: block; position: absolute; z-index: 100; text-align: center;
 .img:hover img { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); -ms-transform: translate3d(-40px, 0, 0); }
 .designs { position: absolute; left: 0; right: 0; margin-left: auto; margin-right: auto; top: 50px; }
     /* =======================================================================================
-    Diseño del Carrousel de Equipos (Substituír con imágenes el background si se requiere)
+    Diseï¿½o del Carrousel de Equipos (Substituï¿½r con imï¿½genes el background si se requiere)
     ======================================================================================= */
-    /*  
+    /*
     div#equipmentSlider a{margin-top:10px; background:gray; width: 13px; height: 13px; display: block; cursor: pointer; text-indent: -9999px; -webkit-border-radius: 20px; -moz-border-radius: 20px; -o-border-radius: 20px; border-radius: 20px; border: 3px solid #c9cbca; }
     div#equipmentSlider a.flex-active {margin-top:10px; background:red; -webkit-border-radius: 0px; -moz-border-radius: 0px; -o-border-radius: 0px; border-radius: 0px;}
     div#equipmentSlider > ol.flex-control-nav.flex-control-paging {top:10px; }
