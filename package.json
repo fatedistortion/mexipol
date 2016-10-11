@@ -1,16 +1,16 @@
- {
-  "name": "Mexipol-Starter-NodeAngular",
+{
+  "name": "mexipol",
   "main": "server.js",
   "dependencies": {
     "body-parser": "~1.4.2",
     "connect-mongo": "^0.8.2",
     "express": "~4.5.1",
     "express-session": "~1.12.1",
-    "jade": "*",
     "method-override": "~2.0.2",
     "mongoose": "~3.8.0",
     "morgan": "~1.2.2",
     "nan": "~2.1.0",
+    "phantom": "^2.1.21",
     "node-phantom": "^0.2.5",
     "nodemailer": "^2.2.1",
     "nodemailer-smtp-transport": "^2.4.1",
@@ -19,7 +19,7 @@
     "passport-facebook": "~2.0.0",
     "passport-google": "~0.3.0",
     "passport-local": "~1.0.0",
-    "phantom": "^0.9.0",
-    "prerender-node": "^2.0.1"
+    "prerender-node": "^2.0.1",
+    "pug": "^2.0.0-beta6"
   }
 }
