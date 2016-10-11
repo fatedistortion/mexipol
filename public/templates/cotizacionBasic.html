@@ -1,0 +1,148 @@
+<section class="cotizationSheet" ng-repeat="product in cotizacion.products">
+<div class="row">
+	<div class="col-xs-6 cotHead">
+		<h1>Cotización
+		</h1>
+		<div class="row">
+			<div class="col-xs-12">
+				Mexicana de Poliurea y Recubrimientos S.A de C.V
+			</div>
+			<div class="col-xs-12">
+				<p>	
+					Departamento de Comercio Digital<br>
+					Calle Cuauhtemoc #19-51 <br>
+					Col. San Pedrito Peñuelas <br>
+					Queretaro, Qro. 76148 <br>
+					México <br>
+					Tel: 442 1833586 <br>
+				</p>
+				
+				<p class="border-t">
+					<b>{{cotizacion.account.title}}</b> <br>
+					{{cotizacion.account.direccion}} <br>
+					{{cotizacion.account.estado}}, {{cotizacion.account.pais}} <br>
+					{{cotizacion.account.tel}} <br>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-6 cotHead">
+		<h1>
+			{{product.premodel}} {{product.model}}
+		</h1>
+			<div class="col-xs-12">
+				<div class="row">
+				<div class="col-xs-4">
+					Fecha
+				</div>
+				<div class="col-xs-8">
+					{{date | date: 'longDate'}}
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-xs-4">
+					Cotización:
+				</div>
+				<div class="col-xs-8">
+					{{cotizacion.number | limitTo: 28}}
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-xs-4">
+					Cliente:
+				</div>
+				<div class="col-xs-8">
+				<b>{{cotizacion.account.title}}</b>
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-xs-4">
+					Correo:
+				</div>
+				<div class="col-xs-8">
+				{{cotizacion.account.contacto[0].correo}}
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-xs-4">
+					Condiciones de Pago:
+				</div>
+				<div class="col-xs-8">
+				50% Anticipo, 50% Entrega
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-xs-4">
+					Tiempo de Entrega:
+				</div>
+				<div class="col-xs-8">
+				2-4 Semanas
+				</div>
+				</div>
+
+			</div>
+			<div class="col-xs-12">
+				<div class="row">
+				<ol style="font-size:10px;">
+					<li>Esta cotización es válida para próximos 30 días</li>
+					<li>Cotización en USD, si el pago se realiza en Pesos Mexicanos deberá realizarse al tipo de cambio publicado en el diario oficial de la federación al día de pago</li>
+					<li>ExWorks planta Querétaro</li>
+				</ol>
+				</div>
+			</div>
+			<div class="col-xs-12">
+			     <img src="img/LogoMPUss.png" class="img-responsive">
+			</div>
+	</div>
+</div>
+	<section>			
+		<div class="row">
+			<!--	Use one table per potential opportunity	-->
+			<table class="table" style="margin-bottom: 5px;">
+			    <thead>
+			      <tr>
+			        <th>#</th>
+			        <th>Clave / Código</th>
+			        <th>Descripción: {{product.premodel}} {{product.model}} - {{product.select[0].type}}</th>
+			        <th>Precio Unitario</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			        <td> {{$index+1}}</td>
+			        <td>{{product.customization[0].codigo}}</td>
+			        <td>
+			        	{{product.select[0].description}} <br>
+			        	<b>{{product.customization[0].caption}}</b>
+			        </td>
+			        <td>{{product.precio | currency: "Usd$"}}</td>
+			      </tr>	
+			      <tr>
+			        <td> </td>
+			        <td><img src="docs/posters/Graco_icon.png" alt="Logo Marca" class="img-responsive" style="width:40px;"></td>
+			        <td><img src="img/equipos/OBJECT_{{product.model}}.png" alt="Equipo a cotizar" class="img-responsive" style="height:200px; margin:auto;"></td>
+			        <td> </td>
+			      </tr>	      
+			    </tbody>
+		  	</table>
+
+		  	<div class="col-xs-9">
+		  		<b>Observaciones:</b> La presente cotizacion incluye puesta en marcha del equipo y capacitacion inicial con duracion maxima de dos jornadas laborales de 8 hrs en las instalaciones del cliente. Se recomienda un regulador de corriente para la correcta operacion del equipo.
+		  	</div>
+		  	<div class="col-xs-3">
+		  	</div>
+
+		</div>
+		<div class="row border-t">
+			<div class="col-xs-5 col-xs-offset-7 text-right">
+			<b>Subtotal:</b> {{product.precio | currency: "Usd$"}}
+			</div>
+			<div class="col-xs-5 col-xs-offset-7 text-right">
+			<b>IVA:</b> {{product.precio*.16 | currency: "Usd$"}}
+			</div>
+			<div class="col-xs-5 col-xs-offset-7 text-right">
+			<b>Total:</b> {{product.precio+(product.precio*.16) | currency: "Usd$"}}
+			</div>
+		</div>
+	</section>
+</section>

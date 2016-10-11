@@ -1,0 +1,48 @@
+<div class="col-sm-12 border-b" ng-repeat="info in preview.opportunities">
+	<button ng-hide="commented" type="button" class="btn btn-float btn-info" ng-init="feedback=false;" ng-click="feedback = !feedback"> <i class="fa fa-comment-o"></i></button>
+	    <div class="col-sm-3">
+	    <div class="col-xs-5 col-md-4">
+	         <img ng-src="/img/equipos/OBJECT_{{info.model}}.png" style="width: 35px;position: relative;left: -25px; top: -5px;"/>
+	    </div>
+	    <div class="col-xs-7 col-md-8">
+	        <lablel><b>Marca: </b></lablel> {{info.brand}}
+	    </div>
+
+	    </div>
+	    <div class="col-sm-3">
+	        <lablel><b>Categoría: </b></lablel> {{info.category}}
+	    </div>
+	    <div class="col-sm-3">
+	        <lablel><b>Modelo: </b></lablel> {{info.model}}
+	    </div>
+	    <div class="col-sm-3">
+	        <lablel><b>Premodelo: </b></lablel> {{info.premodel}}
+	    </div>
+	    <form class="col-xs-12" ng-submit="taskFeedback(potential)" method="get" accept-charset="utf-8" ng-show="feedback && !commented">
+	    	<input class="col-xs-12 feedBackInput" ng-model="$root.directiveDescription" type="text" name="potentialFeedback" value="" placeholder="Prefunta o comentario acerca de esta cotización?">
+
+	    </form>
+	    <p ng-show="commented" class="feedBackInput col-xs-12" style="color:#565656">
+	   <em> {{description}} </em>
+	    <p>
+	    <div class="col-xs-12" ng-click="info.infoSwitch = !info.infoSwitch" ng-init="info.infoSwitch=false">
+	        <h4 ng-if="info.customization.length > 0" class="sub-elementE">
+	        <b>Paquete customizable:   </b> <span ng-hide="info.infoSwitch" style="cursor: pointer"><i class="fa fa-info"></i> Descripción </span> <span ng-show="info.infoSwitch" style="cursor: pointer"><i class="fa fa-info"></i> Código de pedido </span>
+	        </h4>
+	    </div>
+	    <div class="col-sm-12" ng-repeat="package in info.customization | filter:{select: true}" ng-if="info.customization.length > 0">
+	        <div class="col-xs-6" ng-hide="info.infoSwitch">
+
+	        {{package.clave}} <br>
+	        {{package.codigo}}
+	        </div>
+	        
+	        <div class="col-xs-6" ng-hide="info.infoSwitch">
+	        {{package.precio | currency}}
+	        </div>
+	        <div class="col-xs-12" ng-show="info.infoSwitch">
+	        {{package.caption}}
+	        </div>
+	    </div>
+</div>
+Cotizaciones activas para {{$root.user.nombre}}

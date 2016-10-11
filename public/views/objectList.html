@@ -1,0 +1,118 @@
+
+<div class="container" ng-if='$root.activeEmployee'>
+    <div class="row">
+    <h1 style="margin-top:40px;" ng-show="dispType=='accounts'">
+      Vista General de Cuentas
+      <a class="btn btn-default" href="/crm/account/NEW">   Nueva Cuenta</a>
+    </h1>
+    <h1 style="margin-top:40px;" ng-show="dispType=='potentials'">
+      Vista General de Oportunidades
+      <a class="btn btn-default" href="/crm/potential/NEW">   Nueva Oportunidad</a>
+    </h1>
+    <h1 style="margin-top:40px;" ng-show="dispType=='tasks'">
+      Vista General de Tareas
+      <a class="btn btn-default" href="/crm/task/NEW">   Nueva Tarea</a>
+    </h1>
+        <br>
+          <table class="table table-striped" ng-show="dispType=='potentials'">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Id</th>
+                <th>Etapa de venta</th>
+                <th>Origen</th>
+                <th>Índice Descuento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="object in display" ng-class="{'notValid':!object.valid}">
+                <td><a ng-href="/crm/potential/{{object.id}}" title="Editar">{{object.title}}</a><br>
+                <em ng-show="object.fechaDelecion"><span class="glyphicon glyphicon-question-sign"></span>Vence: {{object.fechaDelecion | date:'MMMM/dd/yyyy'}}</em>
+                </td>
+                <td><a ng-href="/crm/potential/{{object.id}}" title="Editar">{{object.id}}</a></td>
+                <td>{{object.estado}}</td>
+                <td>{{object.origen}}</td>
+                <td>{{object.indiceDesc}} 
+                  <button type="button" class="btn btn-default btn-sm" style="float:right" title="Eliminar cuenta {{object.id}}" ng-click="removePotential(object)"><span class="glyphicon glyphicon-trash"></span> </button>
+                  <a class="btn btn-default btn-sm" style="float:right; color:rgb(0, 0, 255)" title="Activar cuenta manualmente {{object.id}}" ng-href="/activation/{{object.accountId}}/{{object.id}}" ng-if="!object.valid">
+                  <span class="glyphicon glyphicon-saved"></span> </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-striped" ng-show="dispType=='accounts'">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Id</th>
+                <th>Estado</th>
+                <th>País</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="object in display" ng-class="{'notValid':!object.valid}">
+                <td><a ng-href="/crm/account/{{object.id}}" title="Editar">{{object.title}}</a></td>
+                <td><a ng-href="/crm/account/{{object.id}}" title="Editar">{{object.id}}</a></td>
+                <td>{{object.estado}}</td>
+                <td>{{object.pais}} <button type="button" class="btn btn-default btn-sm" style="float:right" title="Eliminar cuenta {{object.id}}" ng-click="removeAccount(object._id, object.id)">
+                    <span class="glyphicon glyphicon-trash"></span> 
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-striped" ng-show="dispType=='tasks'">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Potencial</th>
+                <th>Dueño de tarea</th>
+                <th>Estatus</th>
+                <th>Prioridad</th>
+                <th>Cuenta Asignada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="object in display" ng-class="{'notValid':!object.valid}">
+                <td><a ng-href="/crm/task/{{object.id}}" title="Editar">{{object.title}}</a></td>
+                <td><a ng-href="/crm/potential/{{object.idPotential}}" title="Editar">{{object.idPotential}}</a></td>
+                <td>{{object.taskOwner}}</td>
+                <td>{{object.status}}</td>
+                <td>{{object.priority}}</td>
+                <td>{{object.accountId}} <button type="button" class="btn btn-default btn-sm" style="float:right" title="Eliminar cuenta {{object.id}}" ng-click="removeTasks(object)"> <span class="glyphicon glyphicon-trash"></span> </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+    </div>
+    <div class="row">
+    <d3-bars data="d3dataset" label="label" on-click="d3OnClick(item)" ng-show="dispType=='potentials'"></d3-bars>
+    <d3-area data="d3dataset2" label="label" on-click="d3OnClick(item)" ng-show="dispType=='accounts'"></d3-area>
+    </div>
+    <!--
+    <div class="row">
+        <div class="col-md-12">
+            Below Show a list of nerds<br /><br />
+            <div class="col-md-6 col-sm-offset-1" ng-repeat="nerd in nerds">
+                <input type="checkbox" ng-click="deleteNerd(nerd._id)"> Here are {{ nerd.name }} olrait
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form name="nerdForm" ng-submit="nerdForm.$valid && postNerds()" novalidate>         
+                <div class="form-group">                
+                    <input type="text" class="form-control input-lg text-center" placeholder="Nerds and hoes everywhere (FormData.name)" ng-model="formData.name" required />
+                    <button type="submit" class="btn btn-primary btn-lg">Add Nerd</button>
+                    {{nerdForm.$valid}}
+                </div>
+            </form>
+        </div>
+    </div>
+    -->
+</div>
+
+<section class="lastSec text-center col-xs-12">
+
+</section>

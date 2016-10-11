@@ -1,0 +1,42 @@
+<!-- GeekControll as geekCtrl, Alias may be changed in appRoutes
+<div class="jumbotron text-center">
+	<h1>Geek City</h1>
+
+	<p>{{ tagline }}</p>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        Below Show a list of Geeks<br /><br />
+        <div class="col-md-6 col-sm-offset-1" ng-repeat="geek in geeks">
+            <input type="checkbox" ng-click="geekCtrl.deleteGeek(geek._id)">   Geeker: {{ geek.name }}  Olrait
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-med-12">
+            <form ng-submit="geekForm.$valid && geekCtrl.postGeeks()" name="geekForm" novalidate>
+                <!-- ng-model="formData.property" is general for all post methods 
+                <div class="form-group">
+
+                    <!--Binding of formData.name, or other designation on routes
+                    <input type="text" class="form-control input-lg text-center" placeholder="Geeks or Chicks (FormData.name)" ng-model="formData.name" required />
+                    <button type="submit" class="btn btn-primary btn-lg">Add Geek</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    <!--    NEWS SECTION, CONTROLLER SPECIFIC  
+<line class="col-xs-12 lineLast"></line>
+<section class="lastSec text-center col-xs-12">
+    <div class="container">
+        <div class="row">
+            <h1>{{Header}}</h1>
+            <p>{{tagline}}</p>
+        </div>
+    </div>
+</section>
+
+-->

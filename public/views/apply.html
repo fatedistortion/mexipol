@@ -1,0 +1,104 @@
+﻿<!-- Modal myModal-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="Apply.modalClose()"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{modal.figcaption.title}}</h4>
+            </div>
+            <div class="modal-body">
+                <section id="info" class="animate-show" ng-hide="modal.galery">
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            {{modal.figcaption.caption}}
+
+                        </div>
+                    </div>
+
+                    <div class="row" >
+                        <label class="col-xs-12">Equipos</label>
+                        <div class="col-xs-2" ng-repeat="equipo in modal.equipos">
+                            <a ng-href="/equipos/{{equipo.category}}/{{equipo.name}}" target="_blank">
+                                <h4 class="text-center" style="margin-top:8px; margin-bottom:5px">{{equipo.name}} </h4>
+                                <img class="center-block" ng-src="../img/equipos/OBJECT_{{ equipo.name }}.png" alt="{{ equipo.name}}" style="width:100%">
+                            </a>
+                        </div>
+                    </div>
+                    <line class="col-xs-12 line"></line>
+                    <div class="row">
+                        <label class="col-xs-12">Qu&iacute;micos</label>
+                        <div class="col-xs-2" ng-repeat="chem in modal.quimicos">
+                            <a class="docs" ng-href="../docs/Tecnica_{{chem.name}}.pdf" target="_blank">
+                                <i class="fa fa-file-pdf-o fa-3x center-block text-center"></i>
+                                <h4 class="text-center" style="margin-top:8px;">{{chem.name}} </h4>
+                            </a>
+                        </div>
+                    </div>
+                    <line class="col-xs-12 line"></line>
+                    <div class="row">
+                        <label class="col-xs-12">Primers</label>
+                        <div class="col-xs-2" ng-repeat="prim in modal.primarios">
+                            <a class="docs" ng-href="../docs/Tecnica_{{prim.name}}.pdf" target="_blank">
+                                <i class="fa fa-file-pdf-o fa-3x center-block text-center"></i>
+                                <h4 class="text-center" style="margin-top:8px;">{{prim.name}} </h4>
+                            </a>
+                        </div>
+                        <h4 ng-if="modal.primarios.length == 0" class="text-center" style="margin-top:8px;">No aplica </h4>
+                    </div>
+                </section>
+                <section id="galery" class="animate-show" ng-show="modal.galery">
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <img ng-src="../img/aplicaciones/{{modal.figcaption.title}}/{{modal.showOff}}.jpg" style="width:100%;"/>
+                        </div>
+                    </div>
+                </section>
+                <section id="thumbnails">
+                    <line class="col-xs-12 line"></line>
+                    <label class="col-xs-12">Im&aacute;genes</label>
+                    <div class="row">
+                        <div class="col-xs-2" ng-repeat="image in modal.images | limitTo : 6 : 0">
+                            <a ng-click="modal.showOff = {{image.url}}; modal.galery=1;">
+                                <img class="center-block" ng-src="../img/aplicaciones/{{modal.figcaption.title}}/{{image.url}}.jpg" style="width:100%" />
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="Apply.modalClose()">Close</button>
+           <!-- <button type="button" class="btn btn-default">Save changes</button> -->     
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Modal -->
+
+<!-- Start of div.grid for headline -->
+<div class="container">
+    <div class="grid">
+        <figure ng-repeat="headline in Apply.headlines" class="effect-{{headline.ngclass}}">
+            <img ng-src="{{headline.src}}">
+            <figcaption>
+                <h2>{{headline.figcaption.title}}<span>{{headline.figcaption.bold}}</span></h2>
+                <p>{{headline.figcaption.footer}}</p>
+                <!-- Button trigger modal -->
+                <a ng-href="/aplicaciones/{{headline.figcaption.title}}" style="cursor: pointer; z-index:800"></a>
+            </figcaption>
+            <p class="hidden">{{headline.figcaption.caption}}</p>
+        </figure>
+    </div>
+    <!-- END of div.grid for headline -->
+    <!-- column and division set -->
+</div> <!-- intersection separator -->
+
+
+
+
+<!--    NEWS SECTION  -->
+<line class="col-xs-12 lineLast"></line>
+<!-- Post section template is called directly by function in ng-init (queyElements, fields, searchText); searchText puede ser ['Array', 'de', 'varios', 'textos'] o 'string'-->
+<!-- Remember, facebook hashtag changes string constitution -->
+<postsection ng-init="Facebook.FacebookApi('posts', 'message, picture', ['Aplicaciones', '#aplicaciones', 'aplicacion', 'aplicación', 'aplicaciónes' ]);">
+</postsection>

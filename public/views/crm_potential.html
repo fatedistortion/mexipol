@@ -1,0 +1,418 @@
+
+<!-- Modal myModal-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalClose()"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <form  class="row">
+                    <div class="col-xs-3">
+                        <img src="/img/equipos/OBJECT_{{modal.model}}.png" alt="no profile image" class="img-thumbnail">
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <label for="company">Brand:</label> {{modal.brand}}
+                            </div>                        
+                            <div class="row">
+                                <label for="name">Model:</label> {{modal.model}}
+                            </div>                        
+                            <div class="row">
+                                <label for="email">Premodel:</label> {{modal.premodel}}
+                            </div>                        
+                            <div class="row">
+                                <label for="telefono">Category:</label> {{modal.category}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 border-t">
+                        <div class="col-xs-3">
+                        <legend>
+                        Modelo y Código
+                        </legend>
+                        </div>
+                        <div class="col-xs-6">
+                        <legend>
+                        Descripción
+                        </legend>
+                        </div>
+                        <div class="col-xs-3">
+                        <legend>
+                        Precio
+                        </legend>
+                        </div>
+                    </div>
+                    <div class="scrollFit">
+                        <div class="col-xs-12" ng-repeat="type in modal.select" ng-show="phase1">
+                            <div class="col-xs-12 boxedSelect" ng-click="filterSelect(type)">
+                                <label>Tipo: {{type.type}}</label><br>
+                                <p>
+                                {{type.description}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 border-t" ng-show="phase2">
+                            <label>{{selectFilter.type}}</label>
+                            <p>{{selectFilter.description}}</p>
+                        </div>
+                        <div class="col-xs-12 border-b" ng-repeat="feature in modal.customization | filter: selectFilter.type" ng-show="phase2">
+                            <div class="col-xs-3">
+                                <label>
+                                <input type="radio" name="featureRadio"  ng-model="feature.select" ng-value="true" ng-change="clearAllSelect(feature)">
+                                Código: <b>{{feature.codigo}}</b><br>
+                                Clave: <em>{{feature.clave}}</em> 
+                                </label>
+                            </div>
+                            <div class="col-xs-9">
+                                {{feature.caption}}
+                            </div>
+                        </div>
+                    </div>
+                </form>         
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveOpp()" ng-disabled="phase1">Agregar Equipo</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="modalClose()">Cancelar</button>
+           <!-- <button type="button" class="btn btn-default">Save changes</button> -->     
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <h2>
+        {{display.title}}
+         <button type="button" class="btn btn-default" ng-click="formedit = !formedit; editAll();"> <span class="glyphicon glyphicon-pencil" aria-hidden="true" title="Editar"></span></button> 
+          <button type="button" class="btn btn-info" ng-click="sendQuote();"> <span class="glyphicon glyphicon-envelope" aria-hidden="true" title="Editar"></span> Renviar Cotizacion</button> 
+        </h2>
+        <h4 ng-show="sendProcess" class="sendProcess"><i class="fa fa-hourglass-half"></i> Enviando... </h4>
+        <h4 ng-show="sendSuccess" class="sendSuccess"><i class="fa fa-check"></i> {{sendSuccess}} <a ng-href="{{sendLink}}" target="_blank"><b>Ver cotización</b></a></h4>
+        <h4 ng-show="sendError" class="sendError"><i class="fa fa-exclamation-triangle"></i>{{sendError}} <a ng-href="{{sendLink}}" target="_blank">Ver cotización</a></h4>
+        <h3>
+        {{display.id}}
+        </h3>
+        <div class="row border-b blockData2">
+            <div name="{{key}}" class="dataE" ng-class="{'col-sm-12': (key=='tareas'), 'col-sm-6': !(key=='tareas')}"  ng-repeat="(key, value) in display" ng-hide="key=='title' || key == 'id' || key =='information' || key=='opportunities' || key=='taskList' || key=='__v' || key=='fechaDelecion' || key=='valid'">
+                <div class="col-sm-3 col-md-2" ng-if="!(key=='opportunities')">
+                    <lablel class="keyLabel">
+                        <b>{{key}}:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-9 col-md-10 keyLabel" ng-if="!(key=='fechaInicio' || key =='modified' || key =='fechaCierre' || key=='tareas' || key=='opportunities' || key=='taskList' || key=='precio')">
+                    <a ng-href="/crm/account/{{value}}" ng-if="key == 'accountId'">
+                    <b>{{value}}</b>
+                    </a>
+                    <span  ng-if="!(key == 'accountId')">
+                        {{value}}
+                    </span>
+                </div>  
+                <div class="col-sm-9 col-md-10 keyLabel" ng-if="(key=='fechaInicio' || key =='modified' || key =='fechaCierre')">
+                   <em> {{value | date:'MMM/dd/yyyy'}} </em>
+                </div>
+                <div class="col-sm-9 col-md-10 keyLabel" ng-if="(key=='precio')">
+                   <em> {{value | currency: 'usd$'}} </em>
+                </div>
+                <div class="col-sm-12 keyLabel" ng-if="(key=='tareas')" >
+                <div class="col-xs-6" ng-repeat="(tarea, valor) in display.tareas">
+                    <div class="col-xs-3">
+                    <lablel class="keyLabel">
+                        <b>{{tarea}}:</b>
+                    </lablel>
+                    </div>
+                    <div class="col-xs-9">
+                        <b><a ng-href="/crm/task/{{valor.id}}">{{valor.id}}</a></b>
+                    </div>
+
+                </div>
+                
+                   
+                </div>
+                <!-- DO NOT SHOW OPPORTUNITIES ARRAY, THEY'RE SHOWED BELOW -->
+            </div>
+        </div>
+        <form class="row" ng-submit="fillTask()" ng-hide="formedit">
+            <!-- Add necessary information as optional input-->
+            <div class="col-sm-6" ng-hide="edit.title">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Title:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                    <input class="form-control input-lg text-left"  ng-model="display.title" type="text"/>
+                </div>
+            </div>
+            <div class="col-sm-6" ng-hide="edit.account">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Account:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                    <input id="accountEditor" class="form-control input-lg text-left"  ng-model="accountF" ng-init="accountW=1; accountF=display.account;" type="text" ng-click="accountW=1;" placeholder="{{display.accountId}}"/>
+                    <div class="row autofillWrap" ng-show="accountF && accountW" ng-click="accountW=0; accountF=display.account">
+                        <div class="col-xs-12 autofillElement" ng-repeat="account in accounts | filter:accountF" ng-click="autofillAccount(account)">
+                            <div class="col-xs-2">
+                            <!--
+                                <img ng-src="/img/equipos/OBJECT_{{equipment.model}}.png" style="width:100%"/>
+                            -->
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="col-xs-12">
+                                  <b>Nombre: </b> {{account.title}}
+                                </div>
+                                <div class="col-xs-12">
+                                  <b>Id: </b> {{account.id}}
+                                </div>
+                                <div class="col-xs-12">
+                                  <b>Estado y País: </b>{{account.estado}} {{account.pais}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6" ng-hide="edit.descripcion">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Descripción:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                    <input class="form-control input-lg text-left"  ng-model="display.descripcion" type="text"/>
+                </div>
+            </div>
+            <div class="col-sm-6" ng-hide="edit.fechaCierre">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>fechaCierre:</b>
+                    </lablel>
+                </div> 
+                <div class="col-sm-8"> 
+                    <input class="form-control input-lg text-left"  ng-model="display.fechaCierre" type="date"/>
+                </div>
+            </div>
+            <div class="col-sm-6"  ng-hide="edit.prioridad">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>prioridad:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                         <select class="form-control" name="singleSelect2" ng-model="display.prioridad">
+                          <option value="Baja">Baja</option>
+                          <option value="Media">Media</option>
+                          <option value="Alta">Alta</option>
+                          </select>
+                </div> 
+            </div>
+            <div class="col-sm-6" ng-hide="edit.fechaInicio">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Fecha Inicio:</b>
+                    </lablel>
+                </div> 
+                <div class="col-sm-8"> 
+                    <input class="form-control input-lg text-left"  ng-model="display.fechaInicio" type="date"/>
+                </div>
+            </div>
+            <div class="col-sm-6" ng-hide="edit.estado">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Estado:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                     <select class="form-control" name="singleSelect" ng-model="display.estado">
+                      <option value="Necesita Análisis">Necesita Análisis</option>
+                      <option value="Propuesta">Propuesta</option>
+                      <option value="Negociación">Negociación</option>
+                      <option value="Cerrado Ganado">Cerrado Ganado</option>
+                      <option value="Cerrado Perdido">Cerrado Perdido</option>
+                      <option value="Cerrado Perdido a competencia">Cerrado Perdido a competencia</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6" ng-hide="edit.indiceDesc">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Índice Descuento:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                    <input class="form-control input-lg text-left"  ng-model="display.indiceDesc" type="number"/>
+                </div> 
+            </div>
+            <div class="col-sm-6"  ng-hide="edit.origen">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Origen:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                    <input class="form-control input-lg text-left"  ng-model="display.origen" type="text"/>
+                </div> 
+            </div>
+            <div class="col-sm-6"  ng-hide="edit.contacto || !contactShow">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>contacto:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                    
+                    <input id="accountEditor" class="form-control input-lg text-left"  ng-model="accountC" type="text" ng-init="accountD=1" ng-click="accountD=1"/>
+                    <div class="row autofillWrap" ng-show="accountC && accountD" ng-click="accountD=0; accountC=display.contacto">
+                        <div class="col-xs-12 autofillElement" ng-repeat="contacto in contactos | filter:accountC" ng-click="display.contacto=contacto.nombre">
+                            <div class="col-xs-2">
+                            <!--
+                                <img ng-src="/img/equipos/OBJECT_{{equipment.model}}.png" style="width:100%"/>
+                            -->
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="col-xs-12">
+                                  <b>Nombre: </b> {{contacto.nombre}}
+                                </div>
+                                <div class="col-xs-12">
+                                  <b>Correo: </b> {{contacto.correo}}
+                                </div>
+                                <div class="col-xs-12">
+                                  <b>Telefono: </b>{{contacto.tel}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div class="col-xs-12">
+            <button class="btn btn-primary btn-lg" type="submit" value="Submit">Guardar</button>
+            </div>
+        </form>
+        <div class="col-sm-12">
+                <h3>
+                    Oportunidades a cotizar <button type="button" class="btn btn-default" ng-click="formedit2 = !formedit2; editAll();"> <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Agregar Equipos"></span></button>
+                </h3>
+                <form class="row" ng-submit="fillOppotunity()" ng-show="formedit2" novalidate style="margin-bottom: 45px;">
+                <input ng-model="oportunityF" class="form-control input-lg text-center" placeholder="Busca Equipos"/ >
+                <div class="row autofillWrap" ng-show="oportunityF">
+                    <div class="col-xs-6 autofillElement" ng-repeat="equipment in equipos | filter:oportunityF" ng-click="oppModal(equipment)">
+                        <div class="col-xs-2">
+                            <img ng-src="/img/equipos/OBJECT_{{equipment.model}}.png" style="width:100%"/>
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="col-xs-12">
+                              <b>Categoría: </b> {{equipment.category}}
+                            </div>
+                            <div class="col-xs-12">
+                              <b>Marca: </b> {{equipment.brand}}
+                            </div>
+                            <div class="col-xs-12">
+                              <b>Modelo y Submodelo: </b>{{equipment.model}} {{equipment.premodel}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row selectedWrapper" ng-show="selected.length>0">
+                    <div class="col-xs-6 autofillElement selectedElement" ng-repeat="equipment in selected">
+                        <div class="col-xs-2">
+                            <img ng-src="/img/equipos/OBJECT_{{equipment.model}}.png" style="width:100%"/>
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="col-xs-12">
+                              <b>Categoría: </b> {{equipment.category}}
+                            </div>
+                            <div class="col-xs-12">
+                              <b>Marca: </b> {{equipment.brand}}
+                            </div>
+                            <div class="col-xs-12">
+                              <b>Modelo y Submodelo: </b>{{equipment.model}} {{equipment.premodel}}
+                            </div>
+                            <div class="col-xs-12">
+                              <b >Customizaciones: </b>
+                              <div class="col-xs-12" ng-repeat="code in equipment.customization"> {{code.codigo}}
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                             <button type="button" class="btn btn-default" ng-click="selected.splice($index,1)"> <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Agregar Equipos"></span></button>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-lg" type="submit" value="Submit" ng-hide="!selected.length">Guardar</button>
+                </form>
+                <div class="col-sm-12 border-b" ng-repeat="info in display.opportunities">
+                <button type="button" class="btn btn-float btn-warning" ng-click="deleteOppotunity($index)"> <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Agregar Equipos"></span></button>
+                    <div class="col-sm-3">
+                    <div class="col-xs-5 col-md-4">
+                         <img ng-src="/img/equipos/OBJECT_{{info.model}}.png" style="width:100%"/>
+                    </div>
+                    <div class="col-xs-7 col-md-8">
+                        <lablel><b>Marca: </b></lablel> {{info.brand}}
+                    </div>
+
+                    </div>
+                    <div class="col-sm-3">
+                        <lablel><b>Categoría: </b></lablel> {{info.category}}
+                    </div>
+                    <div class="col-sm-3">
+                        <lablel><b>Modelo: </b></lablel> {{info.model}}
+                    </div>
+                    <div class="col-sm-3">
+                        <lablel><b>Premodelo: </b></lablel> {{info.premodel}}
+                    </div>
+                    <div class="col-xs-12">
+                        <h4 ng-if="info.customization.length > 0" class="sub-elementE">
+                        <b>Paquete customizable: </b>
+                        </h4>
+                    </div>
+                    <div class="col-sm-12" ng-repeat="package in info.customization | filter:{select: true}" ng-if="info.customization.length > 0">
+                        <div class="col-xs-3">
+
+                        {{package.clave}} <br>
+                        {{package.codigo}}
+                        </div>
+                        <div class="col-xs-6">
+                        {{package.caption}}
+                        </div>
+                        <div class="col-xs-3">
+                        {{package.precio | currency: 'usd$'}}
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="col-sm-12">
+                  
+                </div>
+            </div>
+    </div>
+    <br>
+    <br>
+<!--
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="nerdForm" ng-submit="nerdForm.$valid && postNerds()" novalidate>         
+                <div class="form-group">                
+                    <input type="text" class="form-control input-lg text-center" placeholder="Nerds and hoes everywhere (FormData.name)" ng-model="formData.name" required />
+                    <button type="submit" class="btn btn-primary btn-lg">Add Nerd</button>
+                    {{nerdForm.$valid}}
+                </div>
+            </form>
+        </div>
+    </div>
+    -->
+</div>
+
+<line class="col-xs-12 lineLast"></line>
+<section class="lastSec text-center col-xs-12">
+    <div class="container">
+        <div class="row">
+            <h1>{{Header}}</h1>
+            <p>{{tagline}}</p>
+        </div>
+    </div>
+</section>

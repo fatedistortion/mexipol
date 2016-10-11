@@ -1,0 +1,88 @@
+<div class="fitAll" ng-hide="$root.activeEmployee">
+
+    <form class="col-xs-6 col-xs-offset-3 loginForm" ng-submit="loginCRM(user)">
+        <h2 class="text-center">
+            Tu cuenta de Empleado
+        </h2>
+        <fieldset class="form-group">
+            <label for="formGroupExampleInput">Correo de Empresa</label>
+            <input type="text" class="form-control" ng-model="user.email" id="formGroupExampleInput" placeholder="@mexipol.com.mx">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="formGroupExampleInput2">Contraseña</label>
+            <input type="password" class="form-control" ng-model="user.password" id="formGroupExampleInput2" placeholder="Contraseña">
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
+
+</div>
+<br>
+
+<div class="container" ng-if='$root.activeEmployee'>
+    <div class="row">
+        <div class="col-md-12 border-b">
+            <h1 class="col-md-12"><a class="gn-icon gn-icon-briefcase" ng-href="/crm/accounts">Cuentas</a></h1>
+            <br /><br />
+            <p class="col-md-9">
+                Ver cuentas o compañías, editar sus contactos y ver sus oportunidades de ventas asignadas a ésta
+            </p>
+            <div class="col-xs-4">
+                <a ng-href="/crm/account/NEW">Crear nuevas cuentas</a>
+            </div>
+            <div class="col-xs-4">
+                <a ng-href="/crm/accounts">Ver cuentas</a>
+            </div>
+        </div>
+        <div class="col-md-12 border-b">
+            <h1 class="col-md-12"><a class="gn-icon gn-icon-dollar" ng-href="/crm/potentials">Oportunidades de ventas</a></h1>
+            <br /><br />
+            <p class="col-md-9">
+                Ver Oportunidades activas y por activas, editar sus productos y contenido
+            </p>
+            <div class="col-xs-4">
+                <a ng-href="/crm/potential/NEW">Crear nuevas oportunidades</a>
+            </div>
+            <div class="col-xs-4">
+                <a ng-href="/crm/potentials">Ver Oportunidades</a>
+            </div>
+        </div>
+        <div class="col-md-12 border-b">
+            <h1 class="col-md-12"><a class="gn-icon gn-icon-calendar-check" ng-href="/crm/tasks">Tareas y Actividades</a></h1>
+            <br /><br />
+            <p class="col-md-9">
+                Ver tareas activas y por terminar, crear nuevas tareas, etc.
+            </p>
+            <div class="col-xs-4">
+                <a ng-href="/crm/task/NEW">Crear nuevas tareas</a>
+            </div>
+            <div class="col-xs-4">
+                <a ng-href="/crm/tasks">Ver Tareas</a>
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="row">
+        <div class="col-md-12">
+            Below Show a list of nerds<br /><br />
+            <div class="col-md-6 col-sm-offset-1" ng-repeat="nerd in nerds">
+                <input type="checkbox" ng-click="deleteNerd(nerd._id)"> Here are {{ nerd.name }} olrait
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form name="nerdForm" ng-submit="nerdForm.$valid && postNerds()" novalidate>         
+                <div class="form-group">                
+                    <input type="text" class="form-control input-lg text-center" placeholder="Nerds and hoes everywhere (FormData.name)" ng-model="formData.name" required />
+                    <button type="submit" class="btn btn-primary btn-lg">Add Nerd</button>
+                    {{nerdForm.$valid}}
+                </div>
+            </form>
+        </div>
+    </div>
+    -->
+</div>
+
+<section class="lastSec text-center col-xs-12">
+
+</section>

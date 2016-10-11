@@ -1,0 +1,26 @@
+El Bakcground tendrá el nombre genérico ("bckgrnd-#".jpg/.png) 
+igual que elarchivo el portada.
+
+Cada objeto deberá tener un "USE_..." en caso que no exista se empleará
+el bckgrnd-# del mes en cuestión.
+
+... los backgrounds deben ser:
+[En caso de uso específico de un equipo]
+USE_[Nombre del equipo]
+
+[En cualquier otro caso de background gustoso]
+bckgrnd-#
+
+
+=====================================
+... los títulos deben ser:
+
+OBJECT_A-25
+OBJECT_XP2i
+OBJECT_...
+OBJECT_[Nombre del equipo]
+
+
+
+
+

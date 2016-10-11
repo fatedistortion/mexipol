@@ -1,0 +1,251 @@
+<!--
+<div class="jumbotron text-center">
+    <h1>Nerds and Proud</h1>
+    <p>{{ tagline }}</p>
+    <p>{{ tokyo }}</p>
+    <h2>Total Nerds: <span class="label label-info">{{ nerds.length }}</span></h2>
+</div>
+-->
+<div class="container">
+    <div class="row">
+        <h2>
+        {{display.title}}
+         <button type="button" class="btn btn-default" ng-click="formedit = !formedit; editAll();"> <span class="glyphicon glyphicon-pencil" aria-hidden="true" title="Editar"></span></button> 
+        </h2>
+        <h3>
+        {{display.id}}
+        </h3>
+        <div class="row border-b blockData">
+            <div class="col-md-6"  ng-repeat="(key, value) in display" ng-hide="key=='title' || key == 'id' || (key =='information') || key=='__v' || key=='fechaDelecion' || key=='valid'">
+                <div class="col-md-2">
+                    <lablel class="keyLabel">
+                        <b>{{key}}:</b>
+                    </lablel>
+                </div>  
+                <div class="col-md-10 keyLabel" ng-if="!(key=='dueDate' || key =='modified' || key =='recordar' || key =='subtasks')">
+                    <a ng-href="/crm/account/{{value}}" ng-if="(key=='accountId')">
+                       <b>{{value}}</b>
+                    </a>
+                    <a ng-href="/crm/potential/{{value}}" ng-if="(key=='idPotential')">
+                        <b>{{value}}</b>
+                    </a>
+                    <span ng-if="!((key=='accountId') || (key=='idPotential'))">
+                        {{value}}
+                    </span>
+                </div>  
+                <div class="col-md-10 keyLabel" ng-if="(key=='dueDate' || key =='modified' || key =='recordar')">
+                   <em> {{value | date:'MMM/dd/yyyy'}} </em>
+                </div>
+                <div class="col-md-10 keyLabel" ng-if="(key=='subtasks')" ng-repeat="subtask in display.subtasks">
+                <div class="col-xs-4">
+                    <em> Contact:{{subtask.contact}}</em>
+                </div>
+                <div class="col-xs-8">
+                    {{subtask.subject}}
+                </div>
+                   
+                </div>
+            </div>
+        </div>
+        <form class="row" ng-submit="fillTask()" ng-hide="formedit">
+            <!-- Add necessary information as optional input-->
+            <div class="col-md-6" ng-hide="edit.title">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Title:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                    <input class="form-control input-lg text-left"  ng-model="display.title" type="text"/>
+                </div>
+            </div>
+            <div class="col-sm-6" ng-hide="edit.account">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Account:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                    <input id="accountEditor" class="form-control input-lg text-left"  ng-model="accountF" ng-init="accountW=1" type="text" ng-click="accountW=1;" placeholder="{{display.accountId}}"/>
+                    <div class="row autofillWrap" ng-show="accountF && accountW" ng-click="accountW=0; accountF=display.account">
+                        <div class="col-xs-12 autofillElement" ng-repeat="account in accounts | filter:accountF" ng-click="autofillAccount(account)">
+                            <div class="col-xs-2">
+                            <!--
+                                <img ng-src="/img/equipos/OBJECT_{{equipment.model}}.png" style="width:100%"/>
+                            -->
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="col-xs-12">
+                                  <b>Nombre: </b> {{account.title}}
+                                </div>
+                                <div class="col-xs-12">
+                                  <b>Id: </b> {{account.id}}
+                                </div>
+                                <div class="col-xs-12">
+                                  <b>Estado y País: </b>{{account.estado}} {{account.pais}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" ng-hide="edit.descripcion">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Descripción:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                    <input class="form-control input-lg text-left"  ng-model="display.descripcion" type="text"/>
+                </div>
+            </div>
+            <div class="col-md-6" ng-hide="edit.dueDate">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>dueDate:</b>
+                    </lablel>
+                </div> 
+                <div class="col-sm-8"> 
+                    <input class="form-control input-lg text-left"  ng-model="display.dueDate" type="date"/>
+                </div>
+            </div>
+            <div class="col-md-6"  ng-hide="edit.priority">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Priority:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                    <select class="form-control" name="singleSelect3" ng-model="display.priority">
+                      <option value="Baja">Baja</option>
+                      <option value="Media">Media</option>
+                      <option value="Alta">Alta</option>
+                    </select>
+                </div> 
+            </div>
+            <div class="col-sm-6" ng-hide="edit.taskType">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>TaskType:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                     <select class="form-control" name="singleSelect3" ng-model="display.taskType">
+                      <option value="General">General</option>
+                      <option value="Feedback">Feedback Cliente</option>
+                      <option value="Venta">Venta</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6" ng-hide="edit.status">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Status:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                     <select class="form-control" name="singleSelect" ng-model="display.status">
+                      <option value="Not Started">Not Started</option>
+                      <option value="Started">Started</option>
+                      <option value="In progress">In progress</option>
+                      <option value="Completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6" ng-hide="edit.dueDate">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Recordar:</b>
+                    </lablel>
+                </div> 
+                <div class="col-sm-8"> 
+                    <input class="form-control input-lg text-left"  ng-model="display.recordar" type="date"/>
+                </div>
+            </div>
+           
+            <div class="col-md-6" ng-hide="edit.idPotential">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Potential Assign:</b>
+                    </lablel>
+                </div> 
+                <div class="col-sm-8">
+                    <input id="potentialEditor" class="form-control input-lg text-left"  ng-model="accountP" ng-init="accountQ=1" type="text" ng-click="accountQ=1;" placeholder="{{display.idPotential}}"/>
+                    <div class="row autofillWrap" ng-show="accountP && accountQ" ng-click="accountQ=0; accountP=display.account">
+                        <div class="col-xs-12 autofillElement" ng-repeat="potential in accountPotentials | filter:accountP" ng-click="autofillPotential(potential)">
+                            <div class="col-xs-2">
+                            <!--
+                                <img ng-src="/img/equipos/OBJECT_{{equipment.model}}.png" style="width:100%"/>
+                            -->
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="col-xs-12">
+                                  <b>Oportunidad Id: </b> {{potential.id}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6"  ng-hide="edit.contact">
+                <div class="col-sm-4">
+                    <lablel class="keyLabel">
+                        <b>Contact Related:</b>
+                    </lablel>
+                </div>  
+                <div class="col-sm-8">
+                    <input id="accountEditor" class="form-control input-lg text-left"  ng-model="accountC" type="text" ng-init="accountD=1" ng-click="accountD=1" placeholder="{{display.contact}}"/>
+                    <div class="row autofillWrap" ng-show="accountC && accountD" ng-click="accountD=0; accountC=display.contact">
+                        <div class="col-xs-12 autofillElement" ng-repeat="contact in contactos | filter:accountC" ng-click="display.contact=contact.nombre">
+                            <div class="col-xs-2">
+                            <!--
+                                <img ng-src="/img/equipos/OBJECT_{{equipment.model}}.png" style="width:100%"/>
+                            -->
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="col-xs-12">
+                                  <b>Nombre: </b> {{contact.nombre}}
+                                </div>
+                                <div class="col-xs-12">
+                                  <b>Correo: </b> {{contact.correo}}
+                                </div>
+                                <div class="col-xs-12">
+                                  <b>Telefono: </b>{{contact.tel}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div class="col-xs-12">
+            <button class="btn btn-primary btn-lg" type="submit" value="Submit">Guardar</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <br>
+<!--
+    <div class="row">
+        <div class="col-md-12">
+            <form name="nerdForm" ng-submit="nerdForm.$valid && postNerds()" novalidate>         
+                <div class="form-group">                
+                    <input type="text" class="form-control input-lg text-center" placeholder="Nerds and hoes everywhere (FormData.name)" ng-model="formData.name" required />
+                    <button type="submit" class="btn btn-primary btn-lg">Add Nerd</button>
+                    {{nerdForm.$valid}}
+                </div>
+            </form>
+        </div>
+    </div>
+    -->
+</div>
+
+
+<line class="col-xs-12 lineLast"></line>
+<section class="lastSec text-center col-xs-12">
+    <div class="container">
+        <div class="row">
+            <h1>{{Header}}</h1>
+            <p>{{tagline}}</p>
+        </div>
+    </div>
+</section>

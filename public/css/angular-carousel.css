@@ -1,0 +1,221 @@
+input[type=range] {
+  width: 300px; }
+
+ul[rn-carousel] {
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  position: relative;
+  -webkit-perspective: 1000px;
+  -ms-perspective: 1000px;
+  perspective: 1000px;
+  -ms-touch-action: pan-y;
+  touch-action: pan-y; }
+
+  ul[rn-carousel] > li {
+    color: black;
+    -webkit-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: visible;
+    vertical-align: top;
+    position: absolute;
+    left: 0;
+    right: 0;
+    white-space: normal;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    width: 100%;
+    height: 100%;
+    display: inline-block; }
+
+/* prevent flickering when moving buffer */
+ul[rn-carousel-buffered] > li {
+  display: none; }
+
+ul[rn-carousel-transition="hexagon"] {
+  overflow: visible; }
+h1[selector]{
+     font-weight:700;
+     font-size:2.3em;
+}
+/* indicators */
+div.rn-carousel-indicator span {
+  cursor: pointer;
+  color: #666; }
+  div.rn-carousel-indicator span.active {
+    color: white; }
+  div.footSelect div{
+      cursor:pointer
+  }
+  div.footSelect div:hover{
+background:rgba(51, 122, 183, 0.61);
+color:white;
+  }
+
+/* prev/next controls */
+.rn-carousel-control {
+  -webkit-transition: opacity 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
+  font-size: 2rem;
+  position: absolute;
+  top: 40%;
+  opacity: 0.75;
+  cursor: pointer; }
+  .rn-carousel-control:hover {
+    opacity: 1; }
+  .rn-carousel-control.rn-carousel-control-prev {
+    left: 0.5em; }
+    .rn-carousel-control.rn-carousel-control-prev:before {
+      content: "<"; }
+  .rn-carousel-control.rn-carousel-control-next {
+    right: 0.5em; }
+    .rn-carousel-control.rn-carousel-control-next:before {
+      content: ">"; }
+    .docs{
+        padding-top:10px;
+        overflow-x: hidden;
+    }
+    .chemIcon {
+        border-left: 1px dashed rgba(92, 82, 82, 0.66);
+    }
+    ul.showCase{
+        /*ul.showCase is a method of displaying angular-carrousel in Semi-SPA mode*/
+        min-height:490px;
+    }
+    ul.showCase.quimCase {
+    font-size: 1em;
+    min-height: 726px;
+}
+    ul.quimCase p.text-justify {
+    font-size: 12px;
+}
+    span.ribbon {
+    position: absolute;
+    margin-top:40px;
+    padding: 6px 16px;
+    border-top-right-radius: 37px;
+    border-bottom-left-radius: 37px;
+    color: white;
+    font-size: 1.0em;
+    /* -webkit-transform: rotate(-40deg); */
+}
+    span.ribbon.Graco{
+        bottom: 5px;
+        left: 5px;
+        height: 40px;
+    }
+    h2.off{
+        font-size:1.5em;
+    }
+    span.ribbon.Reactor2 {
+    background: #DF7B6E;
+}
+    span.ribbon.Reactor {
+    background: #337AB7;
+}
+    span.ribbon.Fusion {
+    background: #9D9D9D;
+}
+    span.ribbon.Probler {
+    background: #242525;
+}
+
+    /*Samsung S4 Landscape Mode*/
+    @media all and (max-width: 670px){
+        .docs{font-size:83%}
+    }
+
+
+
+    /* Keep Carrousel only for Mobile */
+@media all and (min-width: 890px) {
+    .mobileOnly{
+        display: none;
+    }
+
+}
+@media all and (max-width: 890px) {
+
+    a.docs i{
+        display:block;
+    }
+    .screenOnly{
+        display: none;
+    }
+    /*
+        SCREEN FIXIN'IT !!! mOBILE PAGE AT 0.4 RESOLU
+         */
+        ul.showCase{
+        min-height:636px;
+        font-size:1.6em;
+    }
+        p{font-size:16px;}
+        section.lastSec{
+            font-size:1.2em;
+        }
+        section.lastSec p{
+            font-size:20px;
+        }
+        ul.gn-menu li{
+            font-size: 1.3rem;
+            margin-bottom:1em;
+        }
+        ul.gn-submenu{
+            margin-top: 1em;
+        }
+        div.whole{
+            min-height:26.1em;
+        }
+        address{
+            padding:60px 0px 60px 10%;
+
+        }
+        footer{
+            font-size:1em;
+        }
+        .gn-icon-menu::before {
+    margin-left: -15px;
+    vertical-align: -2px;
+    width: 30px;
+    height: 5px;
+    background: #5f6f81;
+    box-shadow: 0 3px white, 0 -10px #5f6f81, 0 -7px white, 0 -20px #5f6f81;
+    content: '';
+}
+        .no-touch .gn-icon-menu:hover::before, .no-touch .gn-icon-menu.gn-selected:hover::before{
+            box-shadow: 0 3px #5f6f81, 0 -10px white, 0 -7px #5f6f81, 0 -20px white;
+        }
+        .gn-menu-main{height:65px;}
+        .gn-menu-main > li > a{padding:7px 30px;}
+
+            span.ribbon {
+    position: relative;
+    margin-top: 4px;
+    padding: 4px 16px;
+    border-top-right-radius: 37px;
+    border-bottom-left-radius: 37px;
+    color: white;
+    font-size: 0.9em;
+    /* -webkit-transform: rotate(-40deg); */
+}
+            .thumbnail{
+                padding:0px !important;
+            }
+
+}
+    /*Samsung S4 Portrait mode*/
+    @media all and (max-width: 390px){
+        .docs{font-size:73%}
+        h1[selector]{font-size:1.2em;}
+        ul.showCase{font-size:1.1em;}
+    }
+        @media all and (min-width: 502px){
+        .docs-wide{}
+        .docs-narrow{display:none}
+    }
+    @media all and (max-width: 502px){
+        .docs-wide{display:none}
+        .docs-narrow{}
+    }

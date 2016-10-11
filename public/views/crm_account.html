@@ -1,0 +1,329 @@
+
+<style name="toMerge">
+</style>
+<!--
+<div class="jumbotron text-center">
+    <h1>Nerds and Proud</h1>
+    <p>{{ tagline }}</p>
+    <p>{{ tokyo }}</p>
+    <h2>Total Nerds: <span class="label label-info">{{ nerds.length }}</span></h2>
+</div>
+-->
+<!-- Modal myModal-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalClose()"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <form  class="row">
+                    <div class="col-xs-3">
+                    <br>
+                    <br>
+                        <img src="img/crm/profile_default.jpg" alt="no profile image" class="img-thumbnail">
+                    </div>
+                    <div class="col-xs-9 border-b">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <label for="company">Company:</label>
+                                <input type="text" class="form-control" id="company" ng-model="modal.title">
+                            </div>                        
+                            <div class="row">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" id="name" ng-model="modal.nombre">
+                            </div>                        
+                            <div class="row">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" ng-model="modal.correo">
+                            </div>                        
+                            <div class="row">
+                                <label for="telefono">Telefono:</label>
+                                <input type="tel" class="form-control" id="telefono" ng-model="modal.tel">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-9 col-xs-offset-3">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <label for="puesto">Puesto:</label>
+                                <input type="text" class="form-control" id="puesto" ng-model="modal.job">
+                            </div>                        
+                            <div class="row">
+                                <label for="supervisor">Supervisor:</label>
+                                <input type="text" class="form-control" id="supervisor" ng-model="modal.boss">
+                            </div>                        
+                            <div class="row">
+                                <label for="direccion">Dirección:</label>
+                                <input type="text" class="form-control" id="direccion" ng-model="modal.direccion">
+                            </div>                        
+                            <div class="row">
+                                <label for="estado">Estado:</label>
+                                <input type="text" class="form-control" id="estado" ng-model="modal.estado">
+                            </div>                        
+                            <div class="row">
+                                <label for="pais">País:</label>
+                                <input type="tex" class="form-control" id="pais" ng-model="modal.pais">
+                            </div>
+                            <div class="row">
+                                <label for="cp">Código Postal:</label>
+                                <input type="text" class="form-control" id="cp" ng-model="modal.cp">
+                            </div>
+                        </div>
+
+                    </div>
+                </form>         
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveContact()">Guardar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="modalClose()">Cerrar</button>
+           <!-- <button type="button" class="btn btn-default">Save changes</button> -->     
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal2" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalClose()"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <form  class="row">
+                    <div class="col-xs-3">
+                        <br>
+                        <br>
+                            <img src="img/crm/profile_default.jpg" alt="no profile image" class="img-thumbnail">
+                    </div>
+                    <div class="col-xs-9 border-b">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <label for="company">Company:</label>
+                                <input type="text" class="form-control" id="company" ng-model="modal.title">
+                            </div>                                          
+                            <div class="row">
+                                <label for="telefono">Telefono:</label>
+                                <input type="tel" class="form-control" id="telefono" ng-model="modal.tel">
+                            </div>
+                            <div class="row">
+                                <label for="direccion">Dirección:</label>
+                                <input type="text" class="form-control" id="direccion" ng-model="modal.direccion">
+                            </div>                        
+                            <div class="row">
+                                <label for="estado">Estado:</label>
+                                <input type="text" class="form-control" id="estado" ng-model="modal.estado">
+                            </div>                        
+                            <div class="row">
+                                <label for="pais">País:</label>
+                                <input type="tex" class="form-control" id="pais" ng-model="modal.pais">
+                            </div>
+                            <div class="row">
+                                <label for="cp">Código Postal:</label>
+                                <input type="text" class="form-control" id="cp" ng-model="modal.cp">
+                            </div>
+                        </div>
+                    </div>
+                </form>         
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveAccount()">Guardar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="modalClose()">Cerrar</button>
+           <!-- <button type="button" class="btn btn-default">Save changes</button> -->     
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Modal -->
+<br>
+<br>
+<div class="container">
+<!-- CONTAINER IS HOME TO SCOPE DISPLAY FILTERED -->
+    <div class="row">
+        <div class="col-md-7 blockData accountBlock">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{display.title}} <button type="button" class="btn btn-default" ng-click="modalParserAccount(display)"> <span class="glyphicon glyphicon-pencil" aria-hidden="true" title="Editar"></span></button>   </h2>
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-xs-3">
+                        <caption><b>País</b></caption>
+                    </div>
+                     <div class="col-xs-9">
+                        {{display.estado}} - {{display.pais}}
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-xs-3">
+                        <caption><b>Dirección:</b></caption>
+                    </div>
+                     <div class="col-xs-9">
+                        {{display.direccion}}
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-xs-3">
+                        <caption><b>Domicilio Preferido:</b></caption>
+                    </div>
+                     <div class="col-xs-9">
+                        Código Postal - {{display.cp}} <br>
+                        Teléfono: - {{display.tel}}
+                    </div>
+                </div>
+                <div class="col-md-12 border-t">   
+                    <caption><b>  Contactos activos para cuenta </b></caption>
+                </div>
+                <div class="col-md-12 buttonplace" ng-init="contactEdit = false">
+                    <button type="button" class="btn btn-default" ng-click="modalParser(display, 'add')">Nuevo Contacto</button>                  
+                    <button type="button" class="btn btn-warning" ng-click="contactEdit = true" ng-hide="contactEdit">Editar Contactos</button>
+                    <button type="button" class="btn btn-danger" ng-click="contactEdit = false" ng-show="contactEdit">Guardar Contactos</button>
+                </div>
+                
+                <div ng-repeat="contact in display.contacto" class="col-md-6 contact-card">
+                    <div class="glyphWrap" ng-show="contactEdit">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true" title="Editar" ng-click="modalParser(contact, 'edit', {{$index}})"></span>
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Eliminar" ng-click="deleteContact({{$index}})"></span>
+                    </div>
+                    <div class="glyphSide">
+                        <div class="col-xs-12">
+                            <label>Nombre:</label>{{contact.nombre}}
+                        </div>
+                        <div class="col-xs-12">
+                            <label>Correo: </label><a ng-href="mailto:{{contact.correo}}">{{contact.correo}}</a>
+                        </div>
+                        <div class="col-xs-12">
+                            <label>Telefono: </label><a ng-href="">{{contact.tel}}</a>
+                        </div>
+                        <div class="col-xs-12" ng-show="contact.job">
+                            <label>Puesto: </label><a ng-href="">{{contact.job}}</a>
+                        </div>
+                        <div class="col-xs-12" ng-show="contact.boss">
+                            <label>Supervisor: </label><a ng-href="">{{contact.boss}}</a>
+                        </div>
+                        <div class="col-xs-12" ng-show="contact.direccion">
+                            <label>Dirección: </label><a ng-href="">{{contact.direccion}}</a>
+                        </div>
+                        <div class="col-xs-12" ng-show="contact.estado">
+                            <label>Estado: </label><a ng-href="">{{contact.estado}}</a>
+                        </div>
+                        <div class="col-xs-12" ng-show="contact.pais">
+                            <label>País: </label><a ng-href="">{{contact.pais}}</a>
+                        </div>
+                        <div class="col-xs-12" ng-show="contact.cp">
+                            <label>Código Postal: </label><a ng-href="">{{contact.cp}}</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-md-5">
+            
+           <!--
+            <donut-chart data="donutData" class="col-md-10 col-md-offset-1"></donut-chart>
+           -->
+                 <donuttwo-chart data="donutData2" class="col-md-10 col-md-offset-1"></donuttwo-chart>
+        </div>
+        <div class="col-xs-12" ng-hide="display.id=='NEW'">
+            <h3 title="Pendientes asignados a usted para esta Cuenta"><b> Tareas </b></h3>
+            <div class="row buttonplace">
+                    <button type="button" class="btn btn-default" ng-click="passTask('NEW', display, '{{tarea.contact}}')">Nueva Tarea</button>
+            </div>
+            <div class="row rowHover2">
+                <div class="col-xs-6">
+                    Título
+                </div><div class="col-xs-3">
+                    Status
+                </div><div class="col-xs-3">
+                    Prioridad
+                </div>
+            </div>
+            <div class="row rowHover" ng-repeat="tarea in dispTasks">
+                <div class="col-xs-6">
+                    <a ng-click="passTask('{{tarea.id}}', display, '{{tarea.contact}}')">{{tarea.id}} - {{tarea.title}}</a>
+                </div><div class="col-xs-3">
+                    {{tarea.status}}
+                </div><div class="col-xs-3">
+                    {{tarea.priority}}
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="row blockData" style="margin-top:15px;" ng-hide="display.id=='NEW'">
+        <div class="row ">
+            <div class="col-xs-12">
+            <h3><b>Cotizaciones y oportunidades de venta</b> <span class="subtitleSpan" style="color: darkgray; font-size:76%;"> asignados a usted</span></h3>
+            <div class="buttonplace">
+            <button type="button" class="btn btn-default" ng-click="passPotential('NEW', display, '')">Nueva Oportunidad</button>
+            </div>
+                <table class="table-hover container col-xs-12" id="accountsT">
+                    <thead>
+                        <tr>
+                            <th colspan="1"> ID - <label>Editar Cotización</label> </th>
+                            <th colspan="1">Titulo</th>
+                            <th colspan="2">Descripción</th>
+                            <th colspan="1">Estado</th>
+                            <th colspan="1">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="potential in dispPot" ng-class="{'active': potential.select}" >
+                        <tr ng-click="potential.checked = !potential.checked" ng-init="potential.checked=false">
+                            <td colspan="1"><input type="checkbox" ng-model="potential.select" aria-label="Toggle ngShow" >{{$index+1}}) - <a ng-href="/crm/potential/{{potential.id}}">{{potential.id}}</a></td>
+                            <td colspan="1">{{potential.title}}</td>
+                            <td colspan="2">{{potential.descripcion}}</td>
+                            <td colspan="1">{{potential.estado}}</td>
+                            <td colspan="1">{{potential.prioridad}}</td>
+                                              
+                        </tr>
+                        <tr ng-show="potential.checked"> 
+                            <td colspan="6">
+                                <div class="col-xs-12" ng-repeat="task in potential.taskList">
+                                    Something
+
+                                </div>
+                            </td>
+                        </tr> 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="row border-top">
+
+        <div class="col-md-12">
+            Below Show a list of nerds<br /><br />
+            <div class="col-md-6 col-sm-offset-1" ng-repeat="nerd in nerds">
+                <input type="checkbox" ng-click="deleteNerd(nerd._id)"> Here are {{ nerd.name }} olrait
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form name="nerdForm" ng-submit="nerdForm.$valid && postNerds()" novalidate>         
+                <div class="form-group">                
+                    <input type="text" class="form-control input-lg text-center" placeholder="Nerds and hoes everywhere (FormData.name)" ng-model="formData.name" required />
+                    <button type="submit" class="btn btn-primary btn-lg">Add Nerd</button>
+                    {{nerdForm.$valid}}
+                </div>
+            </form>
+        </div>
+    </div>
+    -->
+</div>
+
+
+<line class="col-xs-12 lineLast"></line>
+<section class="lastSec text-center col-xs-12">
+    <div class="container">
+        <div class="row">
+            <h1>{{Header}}</h1>
+            <p>{{tagline}}</p>
+        </div>
+    </div>
+</section>

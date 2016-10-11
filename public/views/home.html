@@ -1,0 +1,118 @@
+<analytics></analytics>
+<!-- Modal myModal-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title" id="myModalLabel">{{modal.title}}</h3>
+            </div>
+            <div class="modal-body">
+               <p>{{modal.content}}</p>
+               <p><a id="contactTrigger2" ng-click="Main.contactMain()" style="cursor:pointer;">{{modal.showOff}}</a></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="Main.contactMain()">Close</button>
+                <!-- <button type="button" class="btn btn-default">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Modal -->
+<hot-banner>
+</hot-banner>
+
+<line class="col-xs-12 lineFirst"></line>
+
+<div class="container">
+    <section id="listing">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <a class="mainLink" href="/aplicaciones">
+                    <div class="col-md-7 col-sm-11 col-xs-4 col-md-offset-3 col-xs-offset-0">
+                        <img src="../img/aplicaciones.png" class="img-responsive just" alt="Responsive image" />
+                    </div>
+                </a>
+                <div class="line2 col-xs-7 col-sm-12"></div>
+                <h2 class="text-center col-xs-8 col-sm-12">
+                    Aplicaciones
+                </h2>
+                <p class="col-sm-12 col-xs-8 text-justify">
+                   {{Main.quickLinks.aplicaciones.text | limitTo:Main.quickLinks.aplicaciones.stringLimit}}
+                </p>
+                <button ng-show="Main.quickLinks.aplicaciones.stringMax-Main.quickLinks.aplicaciones.stringMin" class="btn btn-info" ng-click="Main.quickLinks.aplicaciones.stringLimit = changer(Main.quickLinks.aplicaciones.stringLimit, Main.quickLinks.aplicaciones.stringMax, Main.quickLinks.aplicaciones.stringMin); Main.quickLinks.aplicaciones.buttonText=stringChanger(Main.quickLinks.aplicaciones.buttonText)">{{Main.quickLinks.aplicaciones.buttonText}}</button>
+
+            </div> <!---->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <a class="mainLink" href="/equipos">
+                    <div class="col-md-8 col-sm-12 col-xs-4 col-md-offset-2 col-xs-offset-0">
+                        <img src="../img/equipos.png" class="img-responsive just" alt="Responsive image" />
+                    </div>
+                </a>
+                <div class="line2 col-xs-7 col-sm-12"></div>
+                <h2 class="text-center col-xs-8 col-sm-12">
+                    Equipos
+                </h2>
+                <p class="col-sm-12 col-xs-8 text-justify">
+                    {{Main.quickLinks.equipos.text | limitTo:Main.quickLinks.equipos.stringLimit}}
+                </p>   
+            <button ng-show="Main.quickLinks.equipos.stringMax-Main.quickLinks.equipos.stringMin" class="btn btn-info" ng-click="Main.quickLinks.equipos.stringLimit = changer(Main.quickLinks.equipos.stringLimit, Main.quickLinks.equipos.stringMax, Main.quickLinks.equipos.stringMin); Main.quickLinks.equipos.buttonText=stringChanger(Main.quickLinks.equipos.buttonText)">{{Main.quickLinks.equipos.buttonText}}</button>
+                
+
+            </div> <!---->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <a class="mainLink" href="/quimicos">
+                    <div class="col-md-8 col-sm-12 col-xs-4 col-md-offset-2 col-xs-offset-0">
+                        <img src="../img/quimicos.png" class="img-responsive just" alt="Responsive image" />
+                    </div>
+                </a>
+                <div class="line2 col-xs-7 col-sm-12"></div>
+                <h2 class="text-center col-xs-8 col-sm-12">
+                    Qu&#237micos
+                </h2>
+                <p class="col-sm-12 col-xs-8 text-justify">
+                    {{Main.quickLinks.quimicos.text | limitTo:Main.quickLinks.quimicos.stringLimit}}
+                </p>   
+            <button ng-show="Main.quickLinks.quimicos.stringMax-Main.quickLinks.quimicos.stringMin" class="btn btn-info" ng-click="Main.quickLinks.quimicos.stringLimit = changer(Main.quickLinks.quimicos.stringLimit, Main.quickLinks.quimicos.stringMax, Main.quickLinks.quimicos.stringMin); Main.quickLinks.quimicos.buttonText=stringChanger(Main.quickLinks.quimicos.buttonText)">{{Main.quickLinks.quimicos.buttonText}}</button>
+                
+
+            </div> <!---->
+            <div class="col-md-3 col-sm-6 col-xs-12 col-xs-offset-0 col-sm-offset-0">
+                <a class="mainLink" data-toggle="modal" data-target="#myModal2" style="cursor: pointer;">
+                    <div class="col-md-9 col-sm-12 col-xs-4 col-md-offset-2">
+                        <img src="../img/mantenimiento-preventivo.png" class="img-responsive just" alt="Responsive image" />
+                    </div>
+                </a>
+                <div class="line2 col-xs-7 col-sm-12"></div>
+                <h2 class="text-center col-xs-8 col-sm-12">
+                    Asistencia T&#233cnica
+                </h2>
+                <p class="col-sm-12 col-xs-8 text-justify">
+                    {{Main.quickLinks.asistencia.text | limitTo:Main.quickLinks.asistencia.stringLimit}}
+                </p>   
+            <button ng-show="Main.quickLinks.asistencia.stringMax-Main.quickLinks.asistencia.stringMin" class="btn btn-info" ng-click="Main.quickLinks.asistencia.stringLimit = changer(Main.quickLinks.asistencia.stringLimit, Main.quickLinks.asistencia.stringMax, Main.quickLinks.asistencia.stringMin); Main.quickLinks.asistencia.buttonText=stringChanger(Main.quickLinks.asistencia.buttonText)">{{Main.quickLinks.asistencia.buttonText}}</button>
+                
+            </div> <!---->
+        </div>
+    </section>
+</div><!-- end of container -->
+
+
+<!-- intersection separator -->
+
+
+
+<!--    POSSIBLE ADITIONAL CONTENT  -->
+<!--
+<line class="col-xs-12 line"></line>
+<div class="container">
+    <div class="row">
+
+    </div>
+</div>
+    -->
+
+<!--    NEWS SECTION  -->
+<line class="col-xs-12 lineLast"></line>
+<postsection ng-init="Facebook.FacebookApi('posts', 'message, picture');">
+</postsection>
