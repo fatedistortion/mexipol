@@ -1,4 +1,4 @@
-﻿<!doctype html>
+﻿<!DOCTYPE html>
 <html lang="esp" ng-app="Mexipol">
 <head>
     <meta name="fragment" content="!">
@@ -13,38 +13,31 @@
     <meta name="description" content="{{description}}" />
     <meta name="keywords" content="Poliurea, Recubrimientos, Graco, aplicación de Poliurea, impermeabilización, Poliuretano, Mexicana de Poliurea" />
 
-    <meta name="author" content="Pixelblocks" />
+    <meta name="author" content="Cha" />
 
     <!-- CSS & Stylesheets -->
-    <link rel="stylesheet" href="libs/font-awesome-4.2.0/css/font-awesome.css" />
-    <link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css" />
-    <link href='http://fonts.googleapis.com/css?family=Rajdhani:500,700' rel='stylesheet' type='text/css'>
-     <link href='http://fonts.googleapis.com/css?family=Dosis:200,600' rel='stylesheet' type='text/css'>
-     <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
-    <!-- custom styles
-    <link href='libs/bootstrap/fonts/rajdhani.css' rel='stylesheet' type='text/css'>
-    <link href='libs/bootstrap/fonts/dosis.css' rel='stylesheet' type='text/css'>
-   -->
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/queries.css" rel="stylesheet" />
     <link href="css/normalize.css" rel="stylesheet" />
-    <link href="css/menuHead.css" rel="stylesheet" />
-    <link href="css/flexslider.css" rel="stylesheet" />
-    <link href="css/componentMenu.css" rel="stylesheet" />
+    <link href="libs/font-awesome-4.2.0/css/font-awesome.css" rel="stylesheet" />
+    <link href="libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="css/angular-carousel.css" rel="stylesheet" />
     <link href="css/animate.css" rel="stylesheet" />
     <link href="css/component.css" rel="stylesheet" />
-    <link href="css/angular-carousel.css" rel="stylesheet" />
-
+    <link href="css/componentMenu.css" rel="stylesheet" />
+    <link href="css/flexslider.css" rel="stylesheet" />
+    <link href="css/menuHead.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/queries.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Rajdhani:500,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Dosis:200,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
 
     <!-- JS -->
+    <script> window.prerenderReady = false; </script>
     <script src="libs/angular/angular.min.js"></script>
     <script src="libs/angular/angular-resource.js"></script>
     <script src="libs/angular/angular-locale_es-es.js"></script>
-    <script src="js/services/d3.v3.min.js" charset="utf-8"></script>
-    <script> window.prerenderReady = false; </script>
     <script src="libs/angular/angular-cookies.js"></script>
-    <script src="/js/services/angular-resource.js"></script>
     <script src="libs/angular-route/angular-route.min.js"></script>
     <script src="js/services/angular-carousel.js"></script>
     <script src="/js/services/angular-touch.js"></script>
@@ -122,16 +115,10 @@
     <script src="js/appRoutes.js"></script>
     <script src="js/appDirectives.js"></script>
     <script src="js/services/ui-bootstrap-custom-tpls-0.12.0.js"></script>
-    <!--
-        Includes Tooltips, Accordion, Collapse, Transition, Datepicker, Position, Buttons, Dropdown, Pagination, Popover
-                 bindHtml, Progressbar, Typeahead, Timepicker, Tabs
-         -->
     <script src="js/app.js"></script>
 </head>
 
 <body ng-controller="GeneralController as General">
-    <!-- Facebook Pluggin -->
-    <!-- END Facebook Pluggin -->
     <div class="contain">
 
         <!-- HEADER -->
@@ -320,11 +307,6 @@
                                     <li><a class="gn-icon gn-icon-power" href="/crm/logout">Salir</a></li>
                                 </ul>
                             </li>
-                            <!--
-                             <li class="gn-search-item">
-                                <input placeholder="Search" type="search" class="gn-search">
-                                <a class="gn-icon gn-icon-search"><span>Search</span></a>
-                            </li> -->
                             <li><a class="gn-icon gn-icon-house" href="/">Mexicana de Poliurea</a></li>
                             <li><a class="gn-icon gn-icon-application" href="/aplicaciones">Aplicaciones</a></li>
                             <li><a class="gn-icon gn-icon-flask" href="/quimicos">Químicos</a></li>
@@ -345,8 +327,6 @@
             <li class="preLogo"><!--Leave Blank for space arrangle of menu index--></li>
             <li class="logoLi"><a class="clearLink" href="/"><img src="img/LogoMPUss.png" class="logo" /></a></li>
             <li class="sLinks">
-
-
                 <button type="button" class="btn btn-default" ng-click="$root.equipmentModal()" ng-show="$root.activeKart" style="float: right; top: 10px; margin-right: 10px; position: relative;">
                 <span class="glyphicon glyphicon-shopping-cart"></span></button>
               <!-- Add as UL links for notifications -->
@@ -375,17 +355,13 @@
             </li>
 
         </ul>
-
-
         <!-- ANGULAR DYNAMIC CONTENT -->
         <div ng-view>
         </div>
         <!-- ANGULAR DYNAMIC CONTENT -->
-
     </div><!-- END Contain-->
     <!-- ======================== LAST page FOOTER ========================  -->
     <footer ng-hide="$root.hideBanners">
-
         <div class="col-sm-9 col-xs-12" itemscope itemtype="http://schema.org/Place">
             <address itemprop="address" itemtype="http://schema.org/PostalAddress">
                 <strong>{{General.contactInfo.company.name}}</strong><br>
@@ -412,25 +388,16 @@
                 <img src="img/logo_pda.png" class="img-thumbnail" />
             </div>
         </div>
-
     </footer>
     <!-- ======================== END page DRESSER ========================  -->
     <!-- Included js scripts for animation wise, not operational-wise -->
     <script src="libs/jquery.min.js"></script>
-    <script src="js/animation/waypoints.min.js"></script>
-    <script src="js/animation/bootstrap.min.js"></script>
-    <script src="js/animation/scripts.js"></script>
-    <script src="js/animation/jquery.flexslider.js"></script>
-    <!--<script src="js/animation/modernizr.js"></script> -->
-    <script src="js/animation/modernizr.custom.js"></script>
-
     <script src="js/animation/classie.js"></script>
-    <script src="js/animation/gnmenu.js"></script>
     <script src="js/animation/contact.js"></script>
-    <script>
-        //  new gnMenu(document.getElementById('gn-menu'));
-        //var s = skrollr.init();
-    </script>
-
+    <script src="js/animation/gnmenu.js"></script>
+    <script src="js/animation/jquery.flexslider.js"></script>
+    <script src="js/animation/modernizr.custom.js"></script>
+    <script src="js/animation/scripts.js"></script>
+    <script src="js/animation/waypoints.min.js"></script>
 </body>
 </html>

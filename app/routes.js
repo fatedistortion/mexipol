@@ -564,7 +564,7 @@ module.exports = function (app, Nerd, Geek, Potential, Account, Task) {
 	// frontend routes =========================================================
     var hostHeader = function(reqHeader){
        if((reqHeader == 'mexipol.com.mx') || (reqHeader == 'www.mexipol.com.mx')
-       || (reqHeader == 'localhost:8080') || (reqHeader == '70.35.195.234')) {
+       || (reqHeader == 'localhost:8080')) {
         return true
        } else {
         return false
