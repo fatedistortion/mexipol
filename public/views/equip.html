@@ -19,18 +19,18 @@
                         <div class="col-xs-6">
                             <div class="row">
                                 <label>Marca:</label> {{opportunity.brand}}
-                            </div>                                          
+                            </div>
                             <div class="row">
                                 <label>Premodelo:</label> {{opportunity.premodel}}
-                            </div>   
+                            </div>
                             <div class="row">
                                 <label>Paquete:</label> {{opportunity.customization[0].clave}}
-                            </div>                       
+                            </div>
                         </div>
-                        <div class="col-xs-6">                       
+                        <div class="col-xs-6">
                             <div class="row">
                                 <label>Modelo:</label> {{opportunity.model}}
-                            </div>                                            
+                            </div>
                             <div class="row">
                                 <label>Categoría:</label> {{opportunity.category}}
                             </div>
@@ -83,7 +83,7 @@
                                 <input type="text" class="form-control" id="loginPassword" ng-model="modalLogin.password">
                             </div>
                         </div>
-                    </div>                  
+                    </div>
                 </form>
                 <form class="row" ng-if="($root.modalSwap.signup || $root.modalSwap.contact) && $root.modalSwap.new" name="cForm">
                 <div class="col-xs-12" ng-show="$root.modalSwap.signup && $root.modalSwap.new">
@@ -103,11 +103,11 @@
                             <div class="row">
                                 <label for="direccion">Dirección:</label>
                                 <input type="text" class="form-control" id="direccion" ng-model="modalAccount.direccion">
-                            </div>                        
+                            </div>
                             <div class="row">
                                 <label for="estado">Estado:</label>
                                 <input type="text" class="form-control" id="estado" ng-model="modalAccount.estado">
-                            </div>                        
+                            </div>
                             <div class="row">
                                 <label for="pais">País:</label>
                                 <input type="tex" class="form-control" id="pais" ng-model="modalAccount.pais">
@@ -135,7 +135,7 @@
                                 <input type="text" class="form-control" id="direccion" ng-model="modalContact.nombre" name="uName" required>
                                 <span ng-show="cForm.uName.$error.required">Escribe tu nombre de contacto.</span>
 
-                            </div>                        
+                            </div>
                             <div class="row">
                                 <label for="estado">Telefono:</label>
                                 <input type="tel" class="form-control" id="estado" ng-model="modalContact.tel" name="uTel" required>
@@ -150,7 +150,7 @@
                         <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="$root.modalSwap.signup=false; $root.modalSwap.contact=true" ng-show="$root.modalSwap.signup && $root.modalSwap.new">Continuar</button>
                         <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="modalClose()">Cancelar</button>
                     </div>
-                </form>  
+                </form>
                 <form  class="row" ng-hide="$root.modalSwap.signup || $root.modalSwap.contact || $root.modalSwap.login">
                     <div class="col-xs-3">
                         <img src="/img/equipos/OBJECT_{{modal.model}}.png" alt="no profile image" class="img-thumbnail">
@@ -159,13 +159,13 @@
                         <div class="col-xs-12">
                             <div class="row">
                                 <label for="company">Brand:</label> {{modal.brand}}
-                            </div>                        
+                            </div>
                             <div class="row">
                                 <label for="name">Model:</label> {{modal.model}}
-                            </div>                        
+                            </div>
                             <div class="row">
                                 <label for="email">Premodel:</label> {{modal.premodel}}
-                            </div>                        
+                            </div>
                             <div class="row">
                                 <label for="telefono">Category:</label> {{modal.category}}
                             </div>
@@ -178,7 +178,7 @@
                         </legend>
                         </div>
                     </div>
-                   
+
                     <div class="scrollFit">
                         <div class="col-xs-12" ng-repeat="type in modal.select" ng-show="phase1">
                             <div class="col-xs-12 boxedSelect" ng-click="filterSelect(type)">
@@ -210,7 +210,7 @@
                                 <label>
                                 <input type="radio" name="featureRadio"  ng-model="feature.select" ng-if="$index!=0" ng-value="true" ng-change="clearAllSelect(feature)">
                                 Código: <b>{{feature.codigo}}</b><br>
-                                Clave: <em>{{feature.clave}}</em> 
+                                Clave: <em>{{feature.clave}}</em>
                                 </label>
                             </div>
                             <div class="col-xs-9">
@@ -218,7 +218,7 @@
                             </div>
                         </div>
                     </div>
-                </form>         
+                </form>
             </div>
             <div class="modal-footer" ng-hide="$root.modalSwap.signup || $root.modalSwap.contact">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$root.modalSwap.signup=true; $root.modalSwap.contact=false" ng-show="$root.modalSwap.contact && $root.modalSwap.new">Atrás</button>
@@ -230,7 +230,7 @@
                 <button type="button" class="btn btn-primary" data-dismiss="modal" ng-show="!Object.keys(modal).length && $root.modalSwap.kartEnabled && $root.modalSwap.kart" ng-click="sendQuote()">Cotizar equipos</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-show="!Object.keys(modal).length && $root.modalSwap.kartEnabled" ng-click="addClose()">Agregar otros equipos</button>
                 <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="modalClose()">Cancelar</button>
-           <!-- <button type="button" class="btn btn-default">Save changes</button> -->     
+           <!-- <button type="button" class="btn btn-default">Save changes</button> -->
             </div>
         </div>
     </div>
@@ -240,7 +240,7 @@
 <div class="jumbotron text-center" ng-style="jumbo">
 
     <h1><i class="fa fa-2x center-block text-center" ng-class="icon"></i>{{ tagline }}</h1>
-   
+
 
 </div>
 <!-- whole page in inherited, margin  specific under container class -->
@@ -269,12 +269,12 @@
 
     </div>
 
-    
+
     <div class="screenOnly">
         <div class="row">
-            <div class="col-sm-12" ng-repeat="equipo in Equipos.equipos" ng-if="equipo.category == showCase && (queu == equipo.model || queu == 'all')">
-                <div class="media" itemscope itemtype="http://schema.org/Product">
-                    <div class="media-left media-middle col-sm-5">
+            <div class="media no-bg" ng-repeat="equipo in Equipos.equipos" ng-if="equipo.category == showCase && (queu == equipo.model || queu == 'all')">
+                <div class="media-body" itemscope itemtype="http://schema.org/Product">
+                    <div class="col-xs-10 col-sm-5">
                         <span class="ribbon" itemprop="category" style="visibility:hidden; position:absolute;">
                             {{equipo.category}}
                         </span>
@@ -290,8 +290,8 @@
 
 
                     </div>
-                    <div class="media-body col-md-5">
-                        <h1 class="media-heading off" itemprop="name">{{ equipo.model }} 
+                    <div class="col-xs-10 col-sm-5">
+                        <h1 class="media-heading off" itemprop="name">{{ equipo.model }}
                         <button type="button" class="btn btn-default" ng-click="shopEquip(equipo)"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" title="Agregar Equipos"></span>   Cotizar equipo</button>
                         </h1>
                         <h3>{{equipo.type}}</h3>
@@ -441,7 +441,7 @@
                                 <div class="row">
                                     <a class="col-xs-4 docs docs-wide" ng-href="../docs/{{equipo.model}}_{{document.name}}" target="_top" ng-repeat="document in equipo.documents">
                                         <h4 class="text-center" style="margin-top:8px;">
-                                            <i class="fa fa-file-pdf-o fa-2x text-center"></i> {{document.type}} 
+                                            <i class="fa fa-file-pdf-o fa-2x text-center"></i> {{document.type}}
                                         </h4>
                                     </a>
                                 </div>
@@ -464,7 +464,7 @@
                 </ul>
 
             </div>
-            
+
         </div>
     </div>
 
@@ -475,8 +475,3 @@
 <line class="col-xs-12 lineLast"></line>
 <postsection ng-init="Facebook.FacebookApi('posts', 'message, picture', ['equipos','Equipos', 'Graco', 'graco', 'Maquinaria', 'MAQUINARIA']);">
 </postsection>
-
-
-
-
-
