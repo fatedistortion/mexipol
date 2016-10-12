@@ -2,7 +2,7 @@
 <div class="jumbotron text-center" ng-style="jumbo">
 
     <h1><i class="fa fa-2x center-block text-center" ng-class="icon"></i>{{ tagline }}</h1>
-    
+
 
 </div>
 
@@ -36,22 +36,19 @@
 
     <div class="screenOnly">
         <div class="row">
-            <div class="col-sm-12" ng-repeat="quimico in Quimicos.quimicos" ng-if="quimico.category == showCase && (queu == quimico.model || queu == 'all')">
-                <div class="media" itemscope itemtype="http://schema.org/Product">
-                    <div class="media-left media-middle col-sm-5">
-
+            <div class="media no-bg col-sm-12" ng-repeat="quimico in Quimicos.quimicos" ng-if="quimico.category == showCase && (queu == quimico.model || queu == 'all')">
+                <div class="media-body" itemscope itemtype="http://schema.org/Product">
+                    <div class="col-sm-5">
                         <img class="center-block" ng-src="../img/quimicos/OBJECT_{{ quimico.model }}.jpg" alt="{{ quimico.model}}" ng-style="Quimicos.mediaImg" itemprop="image">
-
-
                     </div>
-                    <div class="media-body col-md-5">
+                    <div class="col-md-5">
                         <div class="row">
                             <div class="col-md-5">
                                 <h1 class="media-heading off" itemprop="name">{{ quimico.model }}</h1>
                                 <h3 itemprop="category">{{quimico.premodel}}</h3>
                             </div>
                             <div class="col-md-7 chemIcon">
-                                <!-- Imagen de la familia de químicos en esta división -->
+                                <!-- Imagen de la familia de quï¿½micos en esta divisiï¿½n -->
 
                             </div>
                         </div>
@@ -152,5 +149,5 @@
 
     <!--    NEWS SECTION, CONTROLLER SPECIFIC  -->
 <line class="col-xs-12 lineLast"></line>
-<postsection ng-init="Facebook.FacebookApi('posts', 'message, picture', ['quimicos','Quimicos','primerPoxi', 'químicos', 'recubrimientos', 'Recubrimientos', 'poliurea', 'Poliurea', 'poliuretano', 'Poliuretano']);">
+<postsection ng-init="Facebook.FacebookApi('posts', 'message, picture', ['quimicos','Quimicos','primerPoxi', 'quï¿½micos', 'recubrimientos', 'Recubrimientos', 'poliurea', 'Poliurea', 'poliuretano', 'Poliuretano']);">
 </postsection>
