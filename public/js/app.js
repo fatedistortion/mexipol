@@ -1,5 +1,5 @@
 (function () {
-   var mexApp = angular.module('Mexipol', ['ngResource', 'ngCookies', 'd3','ngRoute', 'FaceService','appRoutes', 'NerdService', 'MainCtrl', 'EventCtrl', 'NerdCtrl', 'GeekCtrl', 'ChemCtrl', 'GeneralCtrl','ApplyCtrl', 'EquipCtrl', 'appDirectives', 'ui.bootstrap', 'ngTouch', 'angular-carousel', 'angulartics', 'angulartics.google.analytics']);
+   var mexApp = angular.module('Mexipol', ['ngResource', 'ngCookies', 'd3','ngRoute', 'FaceService','appRoutes', 'NerdService', 'MainCtrl', 'EventCtrl', 'NerdCtrl', 'GeekCtrl', 'ChemCtrl', 'GeneralCtrl','ApplyCtrl', 'EquipCtrl', 'appDirectives', 'ngTouch', 'angular-carousel', 'angulartics', 'angulartics.google.analytics']);
 //The array elements (ngRoute is an Angular Specific Route module; app.js is required in head of index.HTML
 //This element is the first reference of the angular module as an Angular App called "sampleApp" including all required active elements
 //Whenever adding a new module it should be stated within this angular.module
@@ -27,4 +27,3 @@ function deepCopy(obj) {
    }
    return obj;
 };
- 

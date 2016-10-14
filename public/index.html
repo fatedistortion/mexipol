@@ -16,15 +16,14 @@
     <meta name="author" content="Cha" />
 
     <!-- CSS & Stylesheets -->
-    <link href="css/normalize.css" rel="stylesheet" />
     <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/angular-carousel.css" rel="stylesheet" />
+    <link href="css/carousel.css" rel="stylesheet" />
     <link href="css/animate.css" rel="stylesheet" />
     <link href="css/component.css" rel="stylesheet" />
     <link href="css/componentMenu.css" rel="stylesheet" />
     <link href="css/flexslider.css" rel="stylesheet" />
-    <link href="css/menuHead.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/queries.css" rel="stylesheet" />
@@ -114,7 +113,6 @@
     <script src="js/services/angulartics-ga.min.js"></script>
     <script src="js/appRoutes.js"></script>
     <script src="js/appDirectives.js"></script>
-    <script src="js/services/ui-bootstrap-custom-tpls-0.12.0.js"></script>
     <script src="js/app.js"></script>
 </head>
 
@@ -280,7 +278,7 @@
                 </div>
                 <button type="button" class="btn btn-default" ng-click="$root.equipmentModal()" ng-show="$root.activeKart" style="float: right; top: 10px; margin-right: 10px; position: relative;">
                 <span class="glyphicon glyphicon-shopping-cart"></span></button>
-                <a class="slim" target="_blank"><img src="img/pajarito-twitter.png" class="Logo" /></a>
+                <!--<a class="slim" target="_blank"><img src="img/pajarito-twitter.png" class="Logo" /></a>-->
                 <a class="slim" href="https://www.facebook.com/mexipol" target="_blank"><img src="img/FACEBOOK.png" class="Logo" /></a>
             </li>
 
@@ -362,7 +360,7 @@
     </div><!-- END Contain-->
     <!-- ======================== LAST page FOOTER ========================  -->
     <footer ng-hide="$root.hideBanners">
-        <div class="col-sm-9 col-xs-12" itemscope itemtype="http://schema.org/Place">
+        <div class="col-sm-6 col-xs-12" itemscope itemtype="http://schema.org/Place">
             <address itemprop="address" itemtype="http://schema.org/PostalAddress">
                 <strong>{{General.contactInfo.company.name}}</strong><br>
                 <a ng-href="{{General.contactInfo.company.maps}}" target="_blank" itemprop="streetAddress">{{General.contactInfo.company.street}}</a><span itemprop="hasMap" itemtype="http://schema.org/URL"><link itemprop="url" href="{{General.contactInfo.company.maps}}" /></span> <br>
@@ -377,21 +375,22 @@
                 <abbr tooltip-placement="left" tooltip="Telefono">Tel.:</abbr><pretty itemprop="telephone">{{General.contactInfo.company.tel}} </pretty><br />
             </address>
         </div>
-        <div class="col-sm-3 col-xs-12" id="seals">
-            <div class="col-sm-4 col-sm-offset-3 col-xs-4">
-                <img src="docs/posters/Graco_icon.png" class="img-thumbnail" />
+        <div class="col-sm-6 col-xs-12" id="seals">
+            <div class="col-md-offset-3 col-md-3 col-sm-4 col-xs-4">
+                <img src="docs/posters/Graco_icon.png" class="img-thumbnail pull-right" />
             </div>
-            <div class="col-sm-5 col-xs-5">
-                <img src="img/sspc.png" class="img-thumbnail" />
+            <div class="col-md-3 col-sm-4 col-xs-4">
+                <img src="img/sspc.png" class="img-thumbnail pull-right" />
             </div>
-            <div class="col-sm-5 col-sm-offset-7 col-xs-5">
-                <img src="img/logo_pda.png" class="img-thumbnail" />
+            <div class="col-md-3 col-sm-4 col-xs-4">
+                <img src="img/logo_pda.png" class="img-thumbnail pull-right" />
             </div>
         </div>
     </footer>
     <!-- ======================== END page DRESSER ========================  -->
     <!-- Included js scripts for animation wise, not operational-wise -->
     <script src="js/jquery.min.js"></script>
+    <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="js/animation/classie.js"></script>
     <script src="js/animation/contact.js"></script>
     <script src="js/animation/gnmenu.js"></script>

@@ -1,20 +1,12 @@
 <analytics></analytics>
 <div class="jumbotron text-center" ng-style="jumbo">
-
-    <h1><i class="fa fa-2x center-block text-center" ng-class="icon"></i>{{ tagline }}</h1>
-
-
+    <h1><i class="fa center-block text-center" ng-class="icon"></i>{{ tagline }}</h1>
 </div>
-
-<!-- whole page in inherited, margin specific under container class -->
-<!-- whole page in inherited, margin  specific under container class -->
-<!-- NerdCtrl WORKS DIRECTLY TO $scope UNLIKE GeekCtrl WHICH USES this.var -->
 <p style="
     background: #524747;
-    margin-top: -30px;
-    /* border-bottom: #999 solid 2px; */
     border-top: #817575 solid 2px;
     padding: 3px 8px;
+    margin: 0;
     text-align: center;
     color:white;
 ">Venta y fabricaci&oacute;n - Todos nuestros qu&iacute;micos en presentaci&oacute;n de 20L y 200L</p>
@@ -32,8 +24,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="screenOnly">
         <div class="row">
             <div class="media no-bg col-sm-12" ng-repeat="quimico in Quimicos.quimicos" ng-if="quimico.category == showCase && (queu == quimico.model || queu == 'all')">
@@ -88,8 +78,6 @@
 
         </div>
     </div>
-
-
     <div class="mobileOnly" ng-if="device == 'mobile'">
         <div id="Pistolas">
             <div class="row">
@@ -133,21 +121,15 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </li>
                 </ul>
-
             </div>
-
         </div>
     </div>
-
 </div>
-
-
-    <!--    NEWS SECTION, CONTROLLER SPECIFIC  -->
+<!--    NEWS SECTION, CONTROLLER SPECIFIC  -->
 <line class="col-xs-12 lineLast"></line>
 <postsection ng-init="Facebook.FacebookApi('posts', 'message, picture', ['quimicos','Quimicos','primerPoxi', 'qu�micos', 'recubrimientos', 'Recubrimientos', 'poliurea', 'Poliurea', 'poliuretano', 'Poliuretano']);">
 </postsection>

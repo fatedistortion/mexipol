@@ -573,15 +573,12 @@ div.whole{
     min-height: 220px;
 }
 address {
-    width:40%;
     padding: 20px 0px 20px 10%;
     line-height: 2.5em;
     font-family:'Lato',sans-serif;
     color:#f5faff;
     float: left;
-    margin-bottom:0px !important;
     font-weight:300;
-    /* min-height: 205px; */
 }
 footer img{
     width: auto;
@@ -598,10 +595,7 @@ postsection img.sign{
     bottom:14px;
     left:14px;
 }
-footer #seals div:last-child img{
-    margin-bottom:10px;
-    margin-top: 15px;
-}
+
 .footSelect{
     border-top:solid #445 1px;
     border-left: solid #445 1px;
@@ -676,9 +670,22 @@ a.thumbnail{cursor: pointer;}
     -webkit-filter: grayscale(75%);
     opacity:.7;
 }
+.jumbotron {
+    padding: 1%;
+    margin: 0;
+    background-position-y: 35%;
+    background-size: cover;
+}
 .jumbotron h1{
     color:rgba(255, 255, 255, 0.64);
+    margin: 0;
+    font-size: 4em;
 }
+
+.container {
+    margin: 2% auto auto auto;
+}
+
 ul.notificationList{
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
@@ -1018,20 +1025,9 @@ min-width: -webkit-min-content;
     .mainJumbo{
         background-position-x: 58%;
     }
-    .line {
-        /*opacity:0*/
 
-    }
-    .line2 {
-
-    }
-    footer #seals div:last-child img, footer img{
-    width: auto;
-    padding: 4% !important;
-    max-height: 80px;
-    margin-top: 0px;
-    margin-bottom: 40px;
-    margin-left: 19%;
+    footer #seals {
+        margin-bottom: 4%;
     }
 }
 @media (min-width:768px) {
