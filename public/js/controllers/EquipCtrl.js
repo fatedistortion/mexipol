@@ -56,7 +56,6 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
         $scope.icon = 'fa-cubes';
         $analytics.pageTrack('/equipos');
         console.log('Rootscope Accounts: ', $rootScope.accounts);
-    //  $scope.icon = '../img/equipos.png';
 
     /* Jumbotron Controller for background display */
     $scope.jumbo = {
@@ -74,39 +73,22 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
     $scope.Pistolas = 'AP';
     $scope.Poliuretano = 'A-25';
     $scope.PoliUrea = 'E-XP1';
-        //Scope.showcase can be changes for category update and ngif
-        //Using Queu and Showcase for default model and category items
-        var initialize = function ($routeParams) {
-            //Consider cases where controller is loaded as an instance, such as in Aplications and stop redefining default values for them
-            if (typeof $routeParams.category == 'undefined' ) {
-                //If routeParams is undefined, get basic linkage
-                $scope.showCase = 'Poliuretano';
-                $scope.queu = 'A-25';
-                console.log('routeParams is: ', $routeParams.id);
-                $rootScope.description = 'Venta y Mantenimiento de Equipos para aplicación de Poliurea, Poliuretano y Recubrimientos en Querétaro, México y alrededores, especialistas en maquinaria Graco';
+    //Scope.showcase can be changes for category update and ngif
+    //Using Queu and Showcase for default model and category items
+    var initialize = function ($routeParams) {
+        //Consider cases where controller is loaded as an instance, such as in Aplications and stop redefining default values for them
+        if (typeof $routeParams.category == 'undefined' ) {
+            //If routeParams is undefined, get basic linkage
+            $scope.showCase = 'Poliuretano';
+            $scope.queu = 'A-25';
+            $rootScope.description = 'Venta y Mantenimiento de Equipos para aplicación de Poliurea, Poliuretano y Recubrimientos en Querétaro, México y alrededores, especialistas en maquinaria Graco';
 
-            } else {
-                $scope.showCase = $routeParams.category;
-                $scope.queu = $routeParams.model;
-                var object = $scope.equipos.filter(function (element) { if (element.model == $routeParams.model) { return element; } });
-                if ($location.$$path.search('equipos') != -1) {
-                   // $rootScope.description = object[0].caption;
-                }
-                console.log('Description is: ', $rootScope.description);
-                }
-
-
-        };
-
-        console.log('routeParams are: ');
-        console.log($routeParams);
-        console.log(typeof $routeParams.category== 'undefined');
-
-        $scope.firstStep = function (category, firstItem) {
-        $scope.showCase = category;
-        $scope.queu = firstItem;
+        } else {
+            $scope.showCase = $routeParams.category;
+            $scope.queu = $routeParams.model;
+            var object = $scope.equipos.filter(function (element) { if (element.model == $routeParams.model) { return element; } });
+        }
     };
-
     /*
      * Accents in strings should be written in Hex code
      * \xF3: \xF3

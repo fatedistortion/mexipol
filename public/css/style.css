@@ -596,38 +596,23 @@ postsection img.sign{
     left:14px;
 }
 
-.footSelect{
-    border-top:solid #445 1px;
-    border-left: solid #445 1px;
-    border-top-left-radius:4px;
+.footSelect {
+    border:solid #445 1px;
+    border-radius:4px;
+    padding: 0;
 }
+
+.footSelect h4 {
+    margin: 5px 0;
+}
+
 div.smaller h5 {
     margin-top: 5px;
 }
 div.smaller2 h5 {
     margin-top: 5px;
 }
-div.footSelect:before {
-    content: "Equipos";
-    position: absolute;
-    left: -16px;
-    border-top-right-radius: 4px;
-    padding: 0 4px;
-    top: 13px;
-    text-align: right;
-    -ms-transform: rotate(-90deg); /* IE 9 */
-    -webkit-transform: rotate(-90deg); /* Safari */
-    transform: rotate(-90deg);
-    background: rgb(68, 68, 85);
-    color: white;
-    font-size: 12px;
-}
-div.footSelect.footQuim:before {
-    content: "Quimicos" !important;
-    left: -18px;
-    top: 17px;
 
-}
 .loginError {
     color: #DE2F2F;
     font-size: 16px;
@@ -648,28 +633,34 @@ div.footSelect.footQuim:before {
 .cotHead h1 {
     border-bottom: 1px solid #C1C1C1;
 }
+
+/** Thumbnails **/
 .thumbnail {
     border: 1px solid transparent;
 }
-a.thumbnail{cursor: pointer;}
-
-.thumbnail>img, .thumbnail a>img{
-    min-height:30px;
+a.thumbnail {
+    cursor: pointer;
 }
-.thumbnail a.active>img{
-
+a.thumbnail.active {
+    background-color: #fff;
+    color: #337ab7;
 }
-.thumbnail > img.active{
+.thumbnail>img, .thumbnail a>img {
+    height: 70px;
+}
+.thumbnail > img.active {
     min-height:30px;
     filter: saturate(150%);
     -webkit-filter: saturate(150%);
 }
-.thumbnail > img.passive{
+.thumbnail > img.passive {
     min-height:30px;
     filter: grayscale(75%);
     -webkit-filter: grayscale(75%);
     opacity:.7;
 }
+
+/** Homepage **/
 .jumbotron {
     padding: 1%;
     margin: 0;

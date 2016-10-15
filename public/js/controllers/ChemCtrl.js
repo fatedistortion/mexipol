@@ -28,49 +28,63 @@ ChemCtrl.controller('chemController',['$scope', '$http', '$analytics', '$locatio
         };
 
         //For ng-Show var
-        $scope.chemTypes = [{category: 'Primarios', first:'PrimerPoxi', img:'Epoxide', show: 1},{category: 'Espuma de Poliuretano', first: 'ECOFOAM-30', img:'Urethane', show: 1}, {category: 'Poliureas', first:'PU-100', img:'Urea', show: 1}, { category: 'Recubrimientos', first: 'Poliaspartico', img:'Poliaspartic', show: 0}, { category: 'Pisos', first: 'Densificador', img: 'Floor', show: 0}];
+        $scope.chemTypes = [
+            {
+                category: 'Primarios',
+                first:'PrimerPoxi',
+                img:'Epoxide',
+                show: 1
+            },
+            {
+                category: 'Espuma de Poliuretano',
+                first: 'ECOFOAM-30',
+                img:'Urethane',
+                show: 1
+            },
+            {
+                category: 'Poliureas',
+                first:'PU-100',
+                img:'Urea',
+                show: 1
+            },
+            {
+                category: 'Recubrimientos',
+                first: 'Poliaspartico',
+                img:'Poliaspartic',
+                show: 0
+            },
+            {
+                category: 'Pisos',
+                first: 'Densificador',
+                img: 'Floor',
+                show: 0
+            }
+        ];
         typesLength = $scope.chemTypes.length;
         if (typesLength < 6) { $scope.firstOffset = (12 - typesLength * 2) / 2 } else { $scope.firstOffset = 0 };
         //Scope.showcase can be changes for category update and ngif
         //Using Queu and Showcase for default model and category items
         $scope.showCase = 'Primarios';
         $scope.queu = 'PrimerPoxi';
-        console.log($scope);
-        $scope.firstStep = function (category, firstItem) {
-            $scope.showCase = category;
-            $scope.queu = firstItem;
-            console.log('FirstItem passed as: '+firstItem);
-            console.log('Showcase is: ' + category);
-            console.log('Queu is: ' + $scope.queu);
         //If function is passed with a variable instead of a string, then $scope.variable is referenced.
-        };
         var initialize = function ($routeParams) {
             if (typeof $routeParams.category == 'undefined') {
                 //If routeParams is undefined, get basic linkage
                 $scope.showCase = 'Primarios';
                 $scope.queu = 'PrimerPoxi';
-                console.log('Location is: ', $routeParams);
                 $rootScope.description = 'Cat�logo de Productos Qu�micos entre ellos Poliurea, Poliuretano y Recubrimientos para aplicaciones industriales, comerciales y dom�sticas';
             } else {
                 $scope.showCase = $routeParams.category;
                 $scope.queu = $routeParams.quim;
                 var object = $scope.quimicos.filter(function (element) { if (element.model == $routeParams.quim) { return element; } });
                 $rootScope.description = object[0].caption;
-                console.log('Description is: ', $rootScope.description);
             }
-
         };
-
-
-        console.log(typeof $routeParams.category == 'undefined');
-
-
 
         /*
          * Chemicals DataArray, to be changed to JSON for Production editions
          * REST Functions are listed after array and are to be used for JSON Mongodb in production
          */
-
         this.quimicos = [
             {
                 category: 'Primarios',

@@ -178,7 +178,6 @@ angular.module('appRoutes', [])
         })
         .when('/quimicos', {
             title: '- Quimicos',
-            //controller: 'MainController as Main'
             templateUrl: 'views/quim.html',
             controller: 'chemController as Quimicos'
         //Aliases can be stated same as in ng-controller
