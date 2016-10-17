@@ -244,229 +244,75 @@
 <!-- NerdCtrl WORKS DIRECTLY TO $scope UNLIKE GeekCtrl WHICH USES this.var -->
 <div class="container">
     <div class="row">
-        <h1 class="text-center col-xs-6 col-md-4 col-md-offset-1" selector> {{showCase}} </h1>
-        <div class="col-xs-2 col-md-1">
-            <a class="thumbnail" ng-href="/equipos/Pistolas/{{Pistolas}}">
-                <img ng-show="showCase != 'Pistolas'" src="../img/equipos/Pistolas.png" />
-                <img ng-show="showCase == 'Pistolas'" src="../img/equipos/PistolasA.png" />
-            </a>
-        </div>
-        <div class="col-xs-2 col-md-1">
-            <a class="thumbnail" ng-href="/equipos/PoliUrea/{{PoliUrea}}">
-                <img ng-show="showCase != 'PoliUrea'" src="../img/equipos/Poliurea.png" />
-                <img ng-show="showCase == 'PoliUrea'" src="../img/equipos/PoliureaA.png" />
-            </a>
-        </div>
-        <div class="col-xs-2 col-md-1">
-            <a class="thumbnail" ng-href="/equipos/Poliuretano/{{Poliuretano}}">
-                <img ng-show="showCase != 'Poliuretano'" src="../img/equipos/Poliuretano.png" />
-                <img ng-show="showCase == 'Poliuretano'" src="../img/equipos/PoliuretanoA.png" />
-            </a>
-        </div>
-
-    </div>
-
-
-    <div class="screenOnly">
-        <div class="row">
-            <div class="media no-bg" ng-repeat="equipo in Equipos.equipos" ng-if="equipo.category == showCase && (queu == equipo.model || queu == 'all')">
-                <div class="media-body" itemscope itemtype="http://schema.org/Product">
-                    <div class="col-xs-10 col-sm-5">
-                        <span class="ribbon" itemprop="category" style="visibility:hidden; position:absolute;">
-                            {{equipo.category}}
-                        </span>
-                        <span class="ribbon {{ equipo.premodel }}" itemprop="model">{{ equipo.premodel }}</span>
-                        <span class="ribbon {{ equipo.brand }}" itemprop="brand" itemscope itemtype="http://schema.org/Brand">
-                            <span itemprop="name" style="visibility:hidden">
-                                {{equipo.brand}}
-                            </span>
-                            <img class="brandIcon" src="../docs/posters/{{ equipo.brand }}_icon.png" alt="Graco Logo" />
-                            <link itemprop="url" href="http://www.graco.com/mx/es.html" />
-                        </span>
-                        <img class="center-block" ng-src="../img/equipos/OBJECT_{{ equipo.model }}.png" alt="{{ equipo.model}}" ng-style="Equipos.mediaImg" itemprop="image">
-
-
-                    </div>
-                    <div class="col-xs-10 col-sm-5">
-                        <h1 class="media-heading off" itemprop="name">{{ equipo.model }}
-                        <button type="button" class="btn btn-default" ng-click="shopEquip(equipo)"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" title="Agregar Equipos"></span>   Cotizar equipo</button>
-                        </h1>
-                        <h3>{{equipo.type}}</h3>
-                        <!--DOCS-->
-                        <div class="row">
-                            <a class="col-sm-3 docs" ng-href="../docs/{{equipo.model}}_{{document.name}}" target="_blank" ng-repeat="document in equipo.documents">
-                                <i class="fa fa-file-pdf-o fa-3x center-block text-center"></i>
-                                <h4 class="text-center" style="margin-top:8px;">{{document.type}} </h4>
-                            </a>
-                        </div>
-                        <!--END DOCS-->
-                        <div>
-                            <div ng-repeat="parameter in equipo.parameters">
-                                <label>
-                                    {{parameter.Param}}
-                                </label>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': '{{parameter.Value}}%'}">
-                                        <span class="" ng-show="!parameter.reduce">{{parameter.Value | number:1}}</span>
-                                        <span class="" ng-show="parameter.reduce">{{parameter.Value/10 | number:1}}</span>
-                                    </div>
-                                    <span style="float:right;" ng-show="{{parameter.inVal}}">{{parameter.inText}}: {{parameter.inVal}} psi</span>
-                                </div>
-                            </div>
-                        </div>
-                        <p itemprop="description">{{equipo.caption}}</p>
-                    </div>
-                </div>
+        <div class="col-xs-12 col-sm-10 col-sm-offset-2">
+            <div class="col-xs-4 col-sm-3" ng-repeat="Types in equipTypes">
+                <a class="thumbnail" ng-href="/equipos/{{Types.category}}/{{Types.first}}" ng-class="{active: ('{{showCase}}' == '{{Types.category}}')}">
+                    <img ng-src="../img/equipos/{{Types.img}}A.png" ng-show="'{{showCase}}' == '{{Types.category}}'" />
+                    <img ng-src="../img/equipos/{{Types.img}}.png" ng-show="'{{showCase}}' != '{{Types.category}}'" />
+                    <h3 style="text-align:center">{{Types.category}}</h3>
+                </a>
             </div>
         </div>
+    </div>
+    <div class="row">
         <div class="row">
-            <div class="col-xs-10 col-sm-offset-1 footSelect">
-                <a class="col-xs-2 text-center" ng-repeat="equipo in Equipos.equipos" ng-show="equipo.category == showCase" ng-href="/equipos/{{equipo.category}}/{{equipo.model}}" ng-class="{active: (equipo.model==queu)}">
+            <div class="col-xs-10 col-xs-offset-1 footSelect">
+                <a class="col-xs-4 col-md-2 text-center"
+                    ng-repeat="equipo in Equipos.equipos" ng-show="equipo.category == showCase"
+                    ng-href="/equipos/{{equipo.category}}/{{equipo.model}}" ng-class="{active: (equipo.model==queu)}">
                     {{equipo.model}}
                 </a>
             </div>
-
         </div>
-    </div>
-
-
-    <div class="mobileOnly" ng-if="device == 'mobile'">
-        <div id="Pistolas">
-            <div class="row">
-                <!-- Angular Carrousel FOR MOBILE DEVICES ONLY, use rn-carrousel-deep-watch with ng-if for dynamic on/off; ng-if compares this equip.category to $scope.showCase  -->
-                <!--<input type="number" class="col-md-1" ng-model="carouselIndex">-->
-                <ul rn-carousel rn-carousel-deep-watch class="showCase" ng-if="showCase == 'Pistolas'">
-                    <li class="col-sm-12" ng-repeat="equipo in Equipos.equipos | filter: {category:'Pistolas'}">
-                        <div class="media">
-                            <div class="media-left media-middle col-xs-5">
-                                <img ng-src="../img/equipos/OBJECT_{{ equipo.model }}.png" alt="{{ equipo.model }}" ng-style="Equipos.mediaImg">
-                                <span class="ribbon {{ equipo.premodel }} col-xs-8 col-xs-offset-2">{{ equipo.premodel }}</span>
-                                <a class="col-xs-12 docs docs-narrow" ng-href="../docs/{{equipo.model}}_{{document.name}}" target="_top" ng-repeat="document in equipo.documents">
-                                    <h4 class="text-center" style="margin-top:8px;">
-                                        <i class="fa fa-file-pdf-o fa-2x text-center"></i> {{document.type}}
-                                    </h4>
-                                </a>
-                            </div>
-                            <div class="media-body col-xs-7">
-                                <h2 class="media-heading off">{{ equipo.model }}
-                                    <button type="button" class="btn btn-default" ng-click="shopEquip(equipo)"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" title="Agregar Equipos"></span>   Cotizar equipo</button>
-                                </h2>
-                                <!--DOCS-->
-                                <div class="row">
-                                    <a class="col-xs-4 docs docs-wide" ng-href="../docs/{{equipo.model}}_{{document.name}}" target="_top" ng-repeat="document in equipo.documents">
-                                        <h4 class="text-center" style="margin-top:8px;">
-                                            <i class="fa fa-file-pdf-o fa-2x text-center"></i> {{document.type}}
-                                        </h4>
-                                    </a>
+        <div class="media no-bg" ng-repeat="equipo in Equipos.equipos" ng-if="equipo.category == showCase && (queu == equipo.model || queu == 'all')">
+            <div class="media-body" itemscope itemtype="http://schema.org/Product">
+                <div class="col-xs-12 col-sm-5">
+                    <span class="ribbon" itemprop="category" style="visibility:hidden; position:absolute;">
+                        {{equipo.category}}
+                    </span>
+                    <span class="ribbon {{ equipo.premodel }}" itemprop="model">{{ equipo.premodel }}</span>
+                    <span class="ribbon {{ equipo.brand }}" itemprop="brand" itemscope itemtype="http://schema.org/Brand">
+                        <span itemprop="name" style="visibility:hidden">
+                            {{equipo.brand}}
+                        </span>
+                        <img class="brandIcon" src="../docs/posters/{{ equipo.brand }}_icon.png" alt="Graco Logo" />
+                        <link itemprop="url" href="http://www.graco.com/mx/es.html" />
+                    </span>
+                    <img class="center-block" ng-src="../img/equipos/OBJECT_{{ equipo.model }}.png" alt="{{ equipo.model}}" ng-style="Equipos.mediaImg" itemprop="image">
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <h1 class="media-heading off" itemprop="name">{{ equipo.model }}
+                    <button type="button" class="btn btn-default" ng-click="shopEquip(equipo)"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" title="Agregar Equipos"></span>   Cotizar equipo</button>
+                    </h1>
+                    <h3>{{equipo.type}}</h3>
+                    <!--DOCS-->
+                    <div class="row">
+                        <a class="col-xs-4 docs" ng-href="../docs/{{equipo.model}}_{{document.name}}" target="_blank" ng-repeat="document in equipo.documents">
+                            <i class="fa fa-file-pdf-o fa-3x center-block text-center"></i>
+                            <h4 class="text-center" style="margin-top:8px;">{{document.type}} </h4>
+                        </a>
+                    </div>
+                    <!--END DOCS-->
+                    <div>
+                        <div ng-repeat="parameter in equipo.parameters">
+                            <label>
+                                {{parameter.Param}}
+                            </label>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': '{{parameter.Value}}%'}">
+                                    <span class="" ng-show="!parameter.reduce">{{parameter.Value | number:1}}</span>
+                                    <span class="" ng-show="parameter.reduce">{{parameter.Value/10 | number:1}}</span>
                                 </div>
-                                <!--END DOCS-->
-                                <div>
-                                    <div ng-repeat="parameter in equipo.parameters">
-                                        <label>
-                                            {{parameter.Param}}
-                                        </label>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': '{{parameter.Value}}%'}">
-                                                <span class="sr-only">{{parameter.Value}}% Complete</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p>{{equipo.caption}}</p>
+                                <span style="float:right;" ng-show="{{parameter.inVal}}">{{parameter.inText}}: {{parameter.inVal}} psi</span>
                             </div>
                         </div>
-                    </li>
-                </ul>
-                <!-- END PISTOLAS & START Poliuretano-->
-                <ul rn-carousel rn-carousel-deep-watch class="showCase" ng-if="showCase == 'Poliuretano'">
-                    <li class="col-sm-12" ng-repeat="equipo in Equipos.equipos | filter: {category:'Poliuretano'}">
-                        <div class="media">
-                            <div class="media-left media-middle col-xs-5">
-                                <img ng-src="../img/equipos/OBJECT_{{ equipo.model }}.png" alt="{{ equipo.model }}" ng-style="Equipos.mediaImg">
-                                <span class="ribbon {{ equipo.premodel }} col-xs-8 col-xs-offset-2">{{ equipo.premodel }}</span>
-                                <a class="col-xs-12 docs docs-narrow" ng-href="../docs/{{equipo.model}}_{{document.name}}" target="_top" ng-repeat="document in equipo.documents">
-                                    <h4 class="text-center" style="margin-top:8px;">
-                                        <i class="fa fa-file-pdf-o fa-2x text-center"></i> {{document.type}}
-                                    </h4>
-                                </a>
-                            </div>
-                            <div class="media-body col-xs-7">
-                                <h2 class="media-heading off">{{ equipo.model }}
-                                <button type="button" class="btn btn-default" ng-click="shopEquip(equipo)"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" title="Agregar Equipos"></span>   Cotizar equipo</button>
-                                </h2>
-                                <div class="row">
-                                    <a class="col-xs-4 docs docs-wide" ng-href="../docs/{{equipo.model}}_{{document.name}}" target="_top" ng-repeat="document in equipo.documents">
-                                        <h4 class="text-center" style="margin-top:8px;">
-                                            <i class="fa fa-file-pdf-o fa-2x text-center"></i> {{document.type}}
-                                        </h4>
-                                    </a>
-                                </div>
-                                <div>
-                                    <div ng-repeat="parameter in equipo.parameters">
-                                        <label>
-                                            {{parameter.Param}}
-                                        </label>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': '{{parameter.Value}}%'}">
-                                                <span class="sr-only">{{parameter.Value}}% Complete</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p>{{equipo.caption}}</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <!-- END Poliuretano & START PoliUrea -->
-                <ul rn-carousel rn-carousel-deep-watch class="showCase" ng-if="showCase == 'PoliUrea'">
-                    <li class="col-sm-12" ng-repeat="equipo in Equipos.equipos | filter: {category:'PoliUrea'}">
-                        <div class="media">
-                            <div class="media-left media-middle col-xs-5">
-                                <img ng-src="../img/equipos/OBJECT_{{ equipo.model }}.png" alt="{{ equipo.model }}" ng-style="Equipos.mediaImg">
-                                <span class="ribbon {{ equipo.premodel }} col-xs-8 col-xs-offset-2">{{ equipo.premodel }}</span>
-                                <a class="col-xs-12 docs docs-narrow" ng-href="../docs/{{equipo.model}}_{{document.name}}" target="_top" ng-repeat="document in equipo.documents">
-                                    <h4 class="text-center" style="margin-top:8px;">
-                                        <i class="fa fa-file-pdf-o fa-2x text-center"></i> {{document.type}}
-                                    </h4>
-                                </a>
-                            </div>
-                            <div class="media-body col-xs-7">
-                                <h2 class="media-heading off">{{ equipo.model }}
-                                    <button type="button" class="btn btn-default" ng-click="shopEquip(equipo)"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" title="Agregar Equipos"></span>   Cotizar equipo</button>
-                                </h2>
-                                <div class="row">
-                                    <a class="col-xs-4 docs docs-wide" ng-href="../docs/{{equipo.model}}_{{document.name}}" target="_top" ng-repeat="document in equipo.documents">
-                                        <h4 class="text-center" style="margin-top:8px;">
-                                            <i class="fa fa-file-pdf-o fa-2x text-center"></i> {{document.type}}
-                                        </h4>
-                                    </a>
-                                </div>
-                                <div>
-                                    <div ng-repeat="parameter in equipo.parameters">
-                                        <label>
-                                            {{parameter.Param}}
-                                        </label>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': '{{parameter.Value}}%'}">
-                                                <span class="sr-only">{{parameter.Value}}% Complete</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p>{{equipo.caption}}</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-
+                    </div>
+                    <p itemprop="description">{{equipo.caption}}</p>
+                </div>
             </div>
-
         </div>
     </div>
-
 </div>
-
 
 <!--    NEWS SECTION  -->
 <line class="col-xs-12 lineLast"></line>

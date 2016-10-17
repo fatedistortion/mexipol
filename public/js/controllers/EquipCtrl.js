@@ -10,52 +10,43 @@ var EquipCtrl = angular.module('EquipCtrl', []);
 // Directly inyect EquipmentFactory as dependency of controller
 EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$cookieStore','$http','$analytics', '$location', '$route', '$routeParams', '$rootScope', 'httpUpdate', function ($resource, $scope, $cookies, $cookieStore, $http, $analytics, $location, $route, $routeParams, $rootScope, httpUpdate) {
 
-
-        //Jquery addons
-        angular.element(document).ready(function () {
-
-                var width = $(window).width();
-            if (width <= 1173) { $scope.device = 'mobile'; }
-
-        });
-
     /* Usage of $scope.var =... instead of this.var=... will result in calling directly {{var.object}}
      * in HTML'angular instead of calling the controller specifically as {{controllerName.var.object}}
      */
 
-        $scope.equipos = [];
-        if(typeof $rootScope.modalSwap == 'undefined'){
-        $rootScope.modalSwap = {};
-        //Check if kartEnabled is not already assigned
-            if($rootScope.modalSwap.kartEnabled){
-                $rootScope.modalSwap.add=true;
-            }
+    $scope.equipos = [];
+    if(typeof $rootScope.modalSwap == 'undefined'){
+    $rootScope.modalSwap = {};
+    //Check if kartEnabled is not already assigned
+        if($rootScope.modalSwap.kartEnabled){
+            $rootScope.modalSwap.add=true;
         }
-        $scope.modalAccount = {};
-        $scope.modalContact = {};
-        $scope.modalPotential = {};
-        $scope.modalLogin={};
-        $scope.tabs=1;
-        //GET account & Potentials from REST
-        // $rootScope.accounts
-        // $rootScope.potentials
-        var potentials = $resource('/api/potentials/:potential_id', {potential_id:'@_id'}, {new: {method:'POST', isArray: true}});
-        //var potentials = $resource('/api/potentials');
-        var accounts = $resource('/api/accounts');
-        var account = $resource('/api/accounts/:account_id', {account_id: '@_id'});
+    }
+    $scope.modalAccount = {};
+    $scope.modalContact = {};
+    $scope.modalPotential = {};
+    $scope.modalLogin={};
+    $scope.tabs=1;
+    //GET account & Potentials from REST
+    // $rootScope.accounts
+    // $rootScope.potentials
+    var potentials = $resource('/api/potentials/:potential_id', {potential_id:'@_id'}, {new: {method:'POST', isArray: true}});
+    //var potentials = $resource('/api/potentials');
+    var accounts = $resource('/api/accounts');
+    var account = $resource('/api/accounts/:account_id', {account_id: '@_id'});
 
 
 
-        accounts.query(function(accounts){
-            $rootScope.accounts=accounts;
-        });
-        $scope.newsLink = 'Preparaci\xF3n de la superficie y Aplicaci\xF3n de Poliurea sobre Acero y Concreto [B\xE1sico]';
-        $scope.Header = 'Pr\xF3ximo Curso de Capacitaci\xF3n en Quer\xE9taro'; //Setting MainController.Header to string, if called $scope it's controlled by routeprovider, this.header is controller specific
-        $scope.tagline = 'Equipos';
-        $scope.taglineLink = '/eventos';
-        $scope.icon = 'fa-cubes';
-        $analytics.pageTrack('/equipos');
-        console.log('Rootscope Accounts: ', $rootScope.accounts);
+    accounts.query(function(accounts){
+        $rootScope.accounts=accounts;
+    });
+    $scope.newsLink = 'Preparaci\xF3n de la superficie y Aplicaci\xF3n de Poliurea sobre Acero y Concreto [B\xE1sico]';
+    $scope.Header = 'Pr\xF3ximo Curso de Capacitaci\xF3n en Quer\xE9taro'; //Setting MainController.Header to string, if called $scope it's controlled by routeprovider, this.header is controller specific
+    $scope.tagline = 'Equipos';
+    $scope.taglineLink = '/eventos';
+    $scope.icon = 'fa-cubes';
+    $analytics.pageTrack('/equipos');
+    console.log('Rootscope Accounts: ', $rootScope.accounts);
 
     /* Jumbotron Controller for background display */
     $scope.jumbo = {
@@ -68,11 +59,28 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
         'max-height': '420px',
         color: '#FCF9F9'
     };
-    //For ng-Show var
 
-    $scope.Pistolas = 'AP';
-    $scope.Poliuretano = 'A-25';
-    $scope.PoliUrea = 'E-XP1';
+    //For ng-Show var
+    $scope.equipTypes = [
+        {
+            category: 'Pistolas',
+            first:'AP',
+            img:'Pistolas'
+        },
+        {
+            category: 'Poliuretano',
+            first: 'A-25',
+            img:'Poliurea'
+        },
+        {
+            category: 'PoliUrea',
+            first:'E-XP1',
+            img:'Poliuretano'
+        }
+    ];
+
+    $scope.showCase = 'Pistolas';
+
     //Scope.showcase can be changes for category update and ngif
     //Using Queu and Showcase for default model and category items
     var initialize = function ($routeParams) {

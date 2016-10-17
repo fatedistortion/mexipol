@@ -5,13 +5,6 @@ ChemCtrl.controller('chemController',['$scope', '$http', '$analytics', '$locatio
         //Acqure Controller Variables
         $analytics.pageTrack('/quimicos');
 
-        //Jquery addons
-        angular.element(document).ready(function () {
-
-            var width = $(window).width();
-            if (width <= 873) { $scope.device = 'mobile'; }
-
-        });
         $scope.Header = '';
         $scope.tagline = 'Qu\xEDmicos';
         $scope.icon = 'fa-flask';
@@ -60,8 +53,7 @@ ChemCtrl.controller('chemController',['$scope', '$http', '$analytics', '$locatio
                 show: 0
             }
         ];
-        typesLength = $scope.chemTypes.length;
-        if (typesLength < 6) { $scope.firstOffset = (12 - typesLength * 2) / 2 } else { $scope.firstOffset = 0 };
+        
         //Scope.showcase can be changes for category update and ngif
         //Using Queu and Showcase for default model and category items
         $scope.showCase = 'Primarios';
