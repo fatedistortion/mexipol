@@ -24,12 +24,15 @@
     </div>
     <div class="row">
         <div class="row">
-            <div class="col-xs-10 col-xs-offset-1 footSelect footQuim">
-                <a class="col-xs-4 col-md-2"
-                    ng-repeat="quimico in Quimicos.quimicos" ng-show="quimico.category == showCase"
-                    ng-href="/quimicos/{{quimico.category}}/{{quimico.model}}" ng-class="{active: (quimico.model==queu)}">
-                    <h4 class="text-center">{{quimico.model}}</h4>
-                </a>
+            <div class="col-xs-10 col-xs-offset-1">
+                <ul class="nav nav-tabs">
+                    <li role="presentation"
+                        ng-class="{active: (quimico.model==queu)}"
+                        ng-repeat="quimico in Quimicos.quimicos"
+                        ng-show="quimico.category == showCase">
+                        <a class="text-center" ng-href="/quimicos/{{quimico.category}}/{{quimico.model}}">{{quimico.model}}</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="media no-bg col-xs-12" ng-repeat="quimico in Quimicos.quimicos" ng-if="quimico.category == showCase && (queu == quimico.model || queu == 'all')">

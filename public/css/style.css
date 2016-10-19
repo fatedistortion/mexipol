@@ -803,6 +803,11 @@ a.thumbnail.active {
     background-color: #fff;
     color: #337ab7;
 }
+
+a.thumbnail.active h3 {
+    font-weight: bold;
+}
+
 .thumbnail>img, .thumbnail a>img {
     height: 70px;
 }
@@ -818,20 +823,11 @@ a.thumbnail.active {
     opacity:.7;
 }
 
-span.ribbon {
-   position: absolute;
-   margin-top:40px;
-   padding: 6px 16px;
-   border-top-right-radius: 37px;
-   border-bottom-left-radius: 37px;
-   color: white;
-   font-size: 1.0em;
+.nav-tabs>li.active>a {
+    color: #337ab7;
+    font-weight: bold;
 }
-span.ribbon.Graco {
-    bottom: 5px;
-    left: 5px;
-    height: 40px;
-}
+
 h2.off {
     font-size:1.5em;
 }
