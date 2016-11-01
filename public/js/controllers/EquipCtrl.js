@@ -1,119 +1,106 @@
 var EquipCtrl = angular.module('EquipCtrl', []);
-    /* 
-     * Verification of Mongoose model for Equipments' factory and controller, said like so, 
+    /*
+     * Verification of Mongoose model for Equipments' factory and controller, said like so,
      * an "Administrative" control that may tune description and availability of the page (Admin view, General View)
-     * Get functions should be obtained from a factory instead of inside controller, 
+     * Get functions should be obtained from a factory instead of inside controller,
      * but both should be declared in same JS document
      */
 //EquipCtrl.factory('EquipmentFactory', ['$http', function ($http) {}]);
 
 // Directly inyect EquipmentFactory as dependency of controller
 EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$cookieStore','$http','$analytics', '$location', '$route', '$routeParams', '$rootScope', 'httpUpdate', function ($resource, $scope, $cookies, $cookieStore, $http, $analytics, $location, $route, $routeParams, $rootScope, httpUpdate) {
-        
-        
-        //Jquery addons
-        angular.element(document).ready(function () {
-            
-                var width = $(window).width();
-            if (width <= 1173) { $scope.device = 'mobile'; }
-                              
-        });    
 
     /* Usage of $scope.var =... instead of this.var=... will result in calling directly {{var.object}}
      * in HTML'angular instead of calling the controller specifically as {{controllerName.var.object}}
      */
-    
-        $scope.equipos = [];
-        if(typeof $rootScope.modalSwap == 'undefined'){
-        $rootScope.modalSwap = {};
-        //Check if kartEnabled is not already assigned 
-            if($rootScope.modalSwap.kartEnabled){
-                $rootScope.modalSwap.add=true;
-            }
+
+    $scope.equipos = [];
+    if(typeof $rootScope.modalSwap == 'undefined'){
+    $rootScope.modalSwap = {};
+    //Check if kartEnabled is not already assigned
+        if($rootScope.modalSwap.kartEnabled){
+            $rootScope.modalSwap.add=true;
         }
-        $scope.modalAccount = {};
-        $scope.modalContact = {};
-        $scope.modalPotential = {};
-        $scope.modalLogin={};
-        $scope.tabs=1;
-        //GET account & Potentials from REST
-        // $rootScope.accounts
-        // $rootScope.potentials
-        var potentials = $resource('/api/potentials/:potential_id', {potential_id:'@_id'}, {new: {method:'POST', isArray: true}});
-        //var potentials = $resource('/api/potentials');
-        var accounts = $resource('/api/accounts');
-        var account = $resource('/api/accounts/:account_id', {account_id: '@_id'});
-            
-        
-            
-        accounts.query(function(accounts){
-            $rootScope.accounts=accounts;
-        });
-        $scope.newsLink = 'Preparaci\xF3n de la superficie y Aplicaci\xF3n de Poliurea sobre Acero y Concreto [B\xE1sico]';
-        $scope.Header = 'Pr\xF3ximo Curso de Capacitaci\xF3n en Quer\xE9taro'; //Setting MainController.Header to string, if called $scope it's controlled by routeprovider, this.header is controller specific
-        $scope.tagline = 'Equipos';
-        $scope.taglineLink = '/eventos';
-        $scope.icon = 'fa-cubes';
-        $analytics.pageTrack('/equipos');
-        console.log('Rootscope Accounts: ', $rootScope.accounts);
-    //  $scope.icon = '../img/equipos.png';
-    
+    }
+    $scope.modalAccount = {};
+    $scope.modalContact = {};
+    $scope.modalPotential = {};
+    $scope.modalLogin={};
+    $scope.tabs=1;
+    //GET account & Potentials from REST
+    // $rootScope.accounts
+    // $rootScope.potentials
+    var potentials = $resource('/api/potentials/:potential_id', {potential_id:'@_id'}, {new: {method:'POST', isArray: true}});
+    //var potentials = $resource('/api/potentials');
+    var accounts = $resource('/api/accounts');
+    var account = $resource('/api/accounts/:account_id', {account_id: '@_id'});
+
+
+
+    accounts.query(function(accounts){
+        $rootScope.accounts=accounts;
+    });
+    $scope.newsLink = 'Preparaci\xF3n de la superficie y Aplicaci\xF3n de Poliurea sobre Acero y Concreto [B\xE1sico]';
+    $scope.Header = 'Pr\xF3ximo Curso de Capacitaci\xF3n en Quer\xE9taro'; //Setting MainController.Header to string, if called $scope it's controlled by routeprovider, this.header is controller specific
+    $scope.tagline = 'Equipos';
+    $scope.taglineLink = '/eventos';
+    $scope.icon = 'fa-cubes';
+    $analytics.pageTrack('/equipos');
+    console.log('Rootscope Accounts: ', $rootScope.accounts);
+
     /* Jumbotron Controller for background display */
-    $scope.jumbo = {//Always use jpg for cover fotos to diminish size 
-        'background-image': 'url("../img/equipos/USE_2.jpg")',
-        'background-size': 'cover', 
-        'background-position-y': '34%',
-        color: '#FCF9F9'
+    $scope.jumbo = {
+        'background-image': 'url("../img/equipos/USE_2.jpg")'
     };
-    
+
     /* General Standarization for images & Medias */
     this.mediaImg = {
         'max-width': '100%',
         'max-height': '420px',
         color: '#FCF9F9'
     };
+
     //For ng-Show var
-    
-    $scope.Pistolas = 'AP';
-    $scope.Poliuretano = 'A-25';
-    $scope.PoliUrea = 'E-XP1';
-        //Scope.showcase can be changes for category update and ngif
-        //Using Queu and Showcase for default model and category items
-        var initialize = function ($routeParams) {
-            //Consider cases where controller is loaded as an instance, such as in Aplications and stop redefining default values for them
-            if (typeof $routeParams.category == 'undefined' ) {
-                //If routeParams is undefined, get basic linkage
-                $scope.showCase = 'Poliuretano';
-                $scope.queu = 'A-25';
-                console.log('routeParams is: ', $routeParams.id);
-                $rootScope.description = 'Venta y Mantenimiento de Equipos para aplicación de Poliurea, Poliuretano y Recubrimientos en Querétaro, México y alrededores, especialistas en maquinaria Graco';
+    $scope.equipTypes = [
+        {
+            category: 'Pistolas',
+            first:'AP',
+            img:'Pistolas'
+        },
+        {
+            category: 'Poliuretano',
+            first: 'A-25',
+            img:'Poliurea'
+        },
+        {
+            category: 'PoliUrea',
+            first:'E-XP1',
+            img:'Poliuretano'
+        }
+    ];
 
-            } else {
-                $scope.showCase = $routeParams.category;
-                $scope.queu = $routeParams.model;
-                var object = $scope.equipos.filter(function (element) { if (element.model == $routeParams.model) { return element; } });
-                if ($location.$$path.search('equipos') != -1) {
-                   // $rootScope.description = object[0].caption;
-                }
-                console.log('Description is: ', $rootScope.description);
-                }
-            
+    $scope.showCase = 'Pistolas';
 
-        };
-        
-        console.log('routeParams are: ');
-        console.log($routeParams);
-        console.log(typeof $routeParams.category== 'undefined');
+    //Scope.showcase can be changes for category update and ngif
+    //Using Queu and Showcase for default model and category items
+    var initialize = function ($routeParams) {
+        //Consider cases where controller is loaded as an instance, such as in Aplications and stop redefining default values for them
+        if (typeof $routeParams.category == 'undefined' ) {
+            //If routeParams is undefined, get basic linkage
+            $scope.showCase = 'Poliuretano';
+            $scope.queu = 'A-25';
+            $rootScope.description = 'Venta y Mantenimiento de Equipos para aplicación de Poliurea, Poliuretano y Recubrimientos en Querétaro, México y alrededores, especialistas en maquinaria Graco';
 
-        $scope.firstStep = function (category, firstItem) {
-        $scope.showCase = category;
-        $scope.queu = firstItem;
+        } else {
+            $scope.showCase = $routeParams.category;
+            $scope.queu = $routeParams.model;
+            var object = $scope.equipos.filter(function (element) { if (element.model == $routeParams.model) { return element; } });
+        }
     };
-        
     /*
      * Accents in strings should be written in Hex code
      * \xF3: \xF3
-     * 
+     *
      */
      $scope.showPot = function(index){
         $scope.tabs=index;
@@ -141,22 +128,22 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
         }else{
             //Expects a rootScope User passed by addAccount Variable, cookie needs to be updated
             /*
-            1.  Push $scope.modal to $rootScope.activePotential 
+            1.  Push $scope.modal to $rootScope.activePotential
             2.  Clean $scope.modal to add more equipments
             3.  addEquip should give two options
                  3.1. Ask for quote on current added Equipments
                  3.2. Continue shopping, in which case  (Shopping cart will be enabled in $rootScope.modalSwap)
-            4.  Should check if rootScope.user exists but there's no activePotential which can occur 
+            4.  Should check if rootScope.user exists but there's no activePotential which can occur
                 in cases such as sendQuote(), if so use $scope.addPotential(); to create a new potential
             5.  If rootScope.user exists but activePotential is undefined it's because user logged in with
                 $cookie, call addPotential asswell.
             */
-            if(typeof $scope.accountOrigin == 'undefined'){     
+            if(typeof $scope.accountOrigin == 'undefined'){
                 $scope.accountOrigin=$cookies.get('accountOrigin');
             }
             console.log('User on root is: ', $rootScope.user);
             console.log('User Origin: ', $scope.accountOrigin);
-            
+
             if($scope.accountOrigin=='new'){
                 // if new, this account has just been created and it's cookies should be removed on Quote Submit
                 // New accounts shouldn't be found in api/account since they're created on quote submit only
@@ -176,7 +163,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                 console.log('Getted account is: ', $scope.activeAccount);
                 $cookies.putObject('activeAccount', $scope.activeAccount);
                 $rootScope.activeAccount=$cookies.getObject('activeAccount');
-                
+
             }else{
                 // If process is continuous (Eg. new account with activeKart, returning user with cookies refreshed)
 
@@ -237,7 +224,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                 if($rootScope.activePotential.opportunities.length){
                     // If there's more than one equipment to quote, activateKart button on close
                     $rootScope.activeKart = true;
-                }            
+                }
             }
         }
         $scope.addOverride=false;
@@ -292,7 +279,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                     $scope.modalLogin.error='Password';
                 }else if (element.contacto[i].tel == Compare.password) {
                     $scope.modalLogin.error='Email';
-                }                
+                }
             };
         }
     };
@@ -308,7 +295,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                     $scope.modalLogin.error='Password';
                 }else if (element.contacto[i].tel == Compare.password) {
                     $scope.modalLogin.error='Email';
-                }                
+                }
             };
         }
     };
@@ -328,7 +315,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
             1. Filter accounts which's contact's does not have this email
             2. return account and contact as true
             3. Save account in rootScope.activeAccount
-            4. Save contact in rootScope.user            
+            4. Save contact in rootScope.user
         */
         $scope.loginError=false;
         $scope.activeAccount=$rootScope.accounts.filter(AccountContactHas(loginObject))[0];
@@ -369,7 +356,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
         console.log('For Button: ',($rootScope.modalSwap.signup || $rootScope.modalSwap.contact || ((!Object.keys($scope.modal).length) && $rootScope.modalSwap.kartEnabled) || $rootScope.modalSwap.login));
     }
     $scope.addAccount = function(contact){
-        
+
         //initialize contacto array to push contact from modalContact
         $scope.modalAccount.contacto=[];
         $scope.modalAccount.contacto.push(contact);
@@ -380,7 +367,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
         $rootScope.activeAccount=$scope.modalAccount;
         $rootScope.user=contact;
         //Since an account can have multiple contacts, rootScope.user is logged in contact
-        //Or new account's contact 
+        //Or new account's contact
         $scope.modalContact={};
 
         Actemporal=deepCopy($rootScope.activeAccount.title);
@@ -401,7 +388,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                 Actemporal = Actemporal+'-0'+accountNum;
             }else{
                 Actemporal = Actemporal+'-'+accountNum;
-        }   
+        }
         $rootScope.activeAccount.id = Actemporal;
         $rootScope.activeAccount.valid=false;
         console.log('activeAccount: ',$rootScope.activeAccount);
@@ -418,11 +405,11 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
         2.  After adding a potential ID to account, new equipments are added to potential
             without the need of calling this function.
         3.  addEquip will add equipments to this potential through an if else statement,
-            Since addEquip can find existing potentials assigned to an account's user, 
-            any extra equipment creates a potential on first call.  
+            Since addEquip can find existing potentials assigned to an account's user,
+            any extra equipment creates a potential on first call.
         4.  This function should be called from addAccount() or loginAccount(), creating a NEW
             potential to which equipment will be added after login/register.
-        5.  Potential + Account + Contact Submission only occur on quoteThis() function. 
+        5.  Potential + Account + Contact Submission only occur on quoteThis() function.
         6.  New potential is stored in $rootScope.activePotential, allowing user to move through site
         // $rootScope.activeAccount
         */
@@ -441,7 +428,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
         // Update rootScope Accounts' potential:
         // It's possible that account doesn't exist if it's new, beware undefined error
         // Remove from previous account before adding to new account
-        // Use filter to update previous rootScope while keeping object reference  
+        // Use filter to update previous rootScope while keeping object reference
         // Remove previous account potential by id and then update potential's id
         console.log('Temporal is: ',temporal);
         console.log('rootScope.accounts on addPotential is: ',$rootScope.accounts);
@@ -450,7 +437,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
             // Use potentialsNum to know existing not assigned potentials
             // Naturally, all potentials should begin with '-01', all new potentials are set as '-00'
             // potentialsNum should return number of existing potentials
-            potentialsNum = $rootScope.accounts.filter(idHas(temporal))[0].potentials.filter(idHasNot(temporalId)).length+1;  
+            potentialsNum = $rootScope.accounts.filter(idHas(temporal))[0].potentials.filter(idHasNot(temporalId)).length+1;
         }else{
             potentialsNum=1;
         }
@@ -473,10 +460,10 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
         // Create a new potential using  $rootScope.activePotential
         $rootScope.activePotential.id=temporalId;
         if($scope.accountOrigin=='new'){
-          $rootScope.activePotential.contacto=$rootScope.user.nombre;    
+          $rootScope.activePotential.contacto=$rootScope.user.nombre;
         }else{
             $rootScope.activePotential.contacto=$rootScope.user.nombre;
-            // $rootScope.activePotential.contacto.push($rootScope.user);    
+            // $rootScope.activePotential.contacto.push($rootScope.user);
         }
         $rootScope.activePotential.origen='Web';
         $rootScope.activePotential.precio=0;//Basic default, changed on quote submit
@@ -501,11 +488,11 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
         /*
         1. SendQuote should submit account + Potential + opportunities
         2. Current activePotential should be cleaned without removing rootScope.user
-        3. Submit 
+        3. Submit
             3.1. $rootScope.activeAccount to accounts
             3.2. $rootScope.activePotential to potentials and clean $rootScope.activePotential={};
             3.3. Should pass an email activation link
-            3.4. Should expect or send an email quote 
+            3.4. Should expect or send an email quote
                 3.4.1. Activation email should have a route-based controller to activate account & it's potentials.
         4. Test data should be changed to GET / POST method once completed
         */
@@ -522,10 +509,10 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
             }
             $rootScope.activePotential.opportunities[i].precio=opportunityPrice;
             $rootScope.activePotential.precio=$rootScope.activePotential.precio+opportunityPrice;
-            // Save as a potential's general price quote            
+            // Save as a potential's general price quote
         };
         console.log('Precio set as: ',$rootScope.activePotential.precio);
-        
+
         accountOrigin=$cookies.get('accountOrigin');
         // Avoid repeating accounts and potential on login sessions
         // Restored and logged in sessions got account by GET and saved $cookie
@@ -535,7 +522,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
             //Cookie exists, hence it was loaded by login, do notrepeat account
             console.log('Account origin login, save to: ',$rootScope.activeAccount.id);
             // $rootScope.potentials.push($rootScope.activePotential);
-            
+
             httpUpdate.account($rootScope.activeAccount.id, $rootScope.activeAccount);
             /*
             var account2 = $resource('/api/accounts/'+$rootScope.activeAccount.id, {account_id: '@_id'});
@@ -596,7 +583,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
             // Remove cookies for account and users
             $cookies.remove('activeAccount');
             $cookies.remove('user');
-        }        
+        }
         // ==== Emailing route, passed object should have all variables since it's interpreted using req.body
         /*
             Verify if account has valid:true, if so no activation is needed
@@ -609,7 +596,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
             .success(function (data, status, headers, config) {
                 console.log("Activation Text Sent: " + data);
              //   $analytics.eventTrack('ContactForm', { category: 'Contact', label: 'ContactForm' });
-            
+
             }).error(function (data) {
                 console.log('Error: ' + data);
             });
@@ -633,7 +620,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
             $rootScope.modalSwap.add=true;
 
             //Login as well as Sigunup should return rootScope.user and rootScope.activeAccount
-        }else{        
+        }else{
             $scope.phase2=true;
             $scope.phase1=false;
             type.select=true;
@@ -736,7 +723,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
             },
 
             {
-                category: 'Pistolas',    
+                category: 'Pistolas',
                 model: 'MP',
                 brand: 'Graco',
                 premodel: 'Fusion',
@@ -841,7 +828,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                     /*{ Param: 'Title here', Value: 13 },
                     { Param: 'More Title', Value: 23 },
                     { Param: 'Even More Title',  Value: 33, captionText: 'Presi\xF3n lineal relativa a caudal' }*/],
-                customization:[{caption: 'Solo Equipo', 
+                customization:[{caption: 'Solo Equipo',
                                 codigo: 'NA',
                                 precio: 10000 }
                                  ],
@@ -908,7 +895,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                     { name: 'REPAIR.pdf', type: 'Operaci\xF3n' }]
             },
             {
-        category: 'Poliuretano',    
+        category: 'Poliuretano',
                 model: 'A-25',
                 brand: 'Graco',
         type: 'Neum\xE1tico',
@@ -923,35 +910,35 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                   type:'Sistema estandar',
                   description:'Presion maxima de trabajo 2000 psi (138 bar, 13.8 MPa) Consumo de aire 28 scfm @100 psi. Temperatura maxima de calientamiento del Fluido 190˚F (88˚C). Caudal de salida de material 25 lb (11.4 kg)/min. Calentador de 6 kW. Longitud maxima de mangueras 210 ft (64 m). La maquina puede operar a 230V 1-ph — 40A; 230V 3-ph — 32A; 380V 3-ph — 18.5A'
                 }],
-            customization:[{caption: 'Solo Equipo', 
+            customization:[{caption: 'Solo Equipo',
                                 codigo: '262614',
                                 type:'Sistema estandar',
                                 clave: 'Solo Equipo',
                                 precio: 13540 },
-                                {caption: 'Incluye: Manguera sin calentamiento 35ft (10.6 m) y pistola Fusion AP', 
+                                {caption: 'Incluye: Manguera sin calentamiento 35ft (10.6 m) y pistola Fusion AP',
                                 codigo: 'AP2614',
                                 type:'Sistema estandar',
                                 clave: 'Paquete AP',
                                 precio: 17560 },
-                                {caption: '  Incluye: Manguera sin calentamiento 35ft (10.6 m) y pistola Fusion CS ', 
+                                {caption: '  Incluye: Manguera sin calentamiento 35ft (10.6 m) y pistola Fusion CS ',
                                 codigo: 'AP2614',
                                 type:'Sistema estandar',
                                 clave: 'Paquete CS',
                                 precio: 17850 },
-                                {caption: '  Incluye: Manguera sin calentamiento 35ft (10.6 m) y pistola P2 ', 
+                                {caption: '  Incluye: Manguera sin calentamiento 35ft (10.6 m) y pistola P2 ',
                                 codigo: 'P22614',
                                 type:'Sistema estandar',
                                 clave: 'Paquete P2',
                                 precio: 18140 }
                                 ],
             documents: [
-                    { name: 'FLYER.pdf', type: 'Detalles' }, 
-                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' }, 
+                    { name: 'FLYER.pdf', type: 'Detalles' },
+                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' },
                     { name: 'REPAIR.pdf', type: 'Reparaci\xF3n' }]
-            
+
             },
             {
-        category: 'Poliuretano',    
+        category: 'Poliuretano',
                 model: 'E-8P',
                 brand: 'Graco',
                 premodel: 'Reactor',
@@ -972,66 +959,66 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                   type:'Equipo Pisos | 120 volts, 15 amps, 1 ph 50/60 hz',
                   description:'Presion maxima de trabajo 2000 psi (138 bar, 13.8 MPa). Caudal de salida del material 12 lb (5.4 kg)/min. Calentador de 6 kW. Longitud maxima de mangueras 210 ft (64 m). La maquina puede operar a 230V 1-ph — 40A; 230V 3-ph — 32A; 380V 3-ph — 18.5A'
                 }],
-                customization:[{caption: 'Solo Equipo', 
+                customization:[{caption: 'Solo Equipo',
                                 codigo: '259082',
                                 type:'Equipo Espuma | 120 volts, 15 amps, 1 ph 50/60 hz',
                                 clave: 'Solo Equipo',
                                 precio: 7820 },
-                                {caption: 'Incluye: Manguera sin calentamiento 35ft (10.6 m) y pistola Fusion AP', 
+                                {caption: 'Incluye: Manguera sin calentamiento 35ft (10.6 m) y pistola Fusion AP',
                                 codigo: 'AP9082',
                                 type:'Equipo Espuma | 120 volts, 15 amps, 1 ph 50/60 hz',
                                 clave: 'Paquete AP',
                                 precio: 9460 },
-                                {caption: 'Incluye: Manguera sin calentamiento 35ft (10.6 m) y pistola Fusion CS', 
+                                {caption: 'Incluye: Manguera sin calentamiento 35ft (10.6 m) y pistola Fusion CS',
                                 clave: 'Paquete CS',
                                 codigo: 'CS9082',
                                 type:'Equipo Espuma | 120 volts, 15 amps, 1 ph 50/60 hz',
                                 precio: 9700 },
-                                {caption: 'Incluye: Manguera sin calentamiento35ft (10.6 m)  y pistola Probler  P2', 
+                                {caption: 'Incluye: Manguera sin calentamiento35ft (10.6 m)  y pistola Probler  P2',
                                 codigo: 'P29082',
                                 type:'Equipo Espuma | 120 volts, 15 amps, 1 ph 50/60 hz',
                                 clave: 'Paquete P2',
                                 precio: 9960 },
 
-                                {caption: 'Solo Equipo', 
+                                {caption: 'Solo Equipo',
                                 codigo: '259083',
                                 clave: 'Solo Equipo',
                                 type:'Equipo Espuma | 240 volts, 10 amps, 1 ph 50/60 hz',
                                 precio: 7820 },
-                                {caption: 'Incluye: Manguera sin calentamiento 35ft (10.6 m) y pistola Fusion AP', 
+                                {caption: 'Incluye: Manguera sin calentamiento 35ft (10.6 m) y pistola Fusion AP',
                                 codigo: 'AP9083',
                                 clave: 'Paquete AP',
                                 type:'Equipo Espuma | 240 volts, 10 amps, 1 ph 50/60 hz',
                                 precio: 9460 },
-                                {caption: 'Incluye: Manguera sin calentamiento 35ft (10.6 m) y pistola Fusion CS', 
+                                {caption: 'Incluye: Manguera sin calentamiento 35ft (10.6 m) y pistola Fusion CS',
                                 clave: 'Paquete CS',
                                 codigo: 'CS9083',
                                 type:'Equipo Espuma | 240 volts, 10 amps, 1 ph 50/60 hz',
                                 precio: 9700 },
-                                {caption: 'Incluye: Manguera sin calentamiento35ft (10.6 m)  y pistola Probler  P2', 
+                                {caption: 'Incluye: Manguera sin calentamiento35ft (10.6 m)  y pistola Probler  P2',
                                 codigo: 'P29083',
                                 type:'Equipo Espuma | 240 volts, 10 amps, 1 ph 50/60 hz',
                                 clave: 'Paquete P2',
                                 precio: 9960 },
 
 
-                                {caption: 'Incluye Pistolal de dosificacion manual 2K y manguera de 35ft(10.6m) 1/4 DI sin linea de aire', 
+                                {caption: 'Incluye Pistolal de dosificacion manual 2K y manguera de 35ft(10.6m) 1/4 DI sin linea de aire',
                                 codigo: '25R151',
                                 type:'Equipo Pisos | 120 volts, 15 amps, 1 ph 50/60 hz',
                                 clave: 'Solo Equipo',
                                 precio: 9460 },
 
-                                {caption: 'Incluye Pistolal de dosificacion manual 2K y manguera 35ft(10.6m) 1/4 DI sin linea de aire', 
+                                {caption: 'Incluye Pistolal de dosificacion manual 2K y manguera 35ft(10.6m) 1/4 DI sin linea de aire',
                                 codigo: '259083',
                                 type:'Equipo Pisos | 120 volts, 15 amps, 1 ph 50/60 hz',
                                 clave: 'Solo Equipo',
                                 precio: 9460 }],
                 documents: [
-                    { name: 'FLYER.pdf', type: 'Detalles' }, 
+                    { name: 'FLYER.pdf', type: 'Detalles' },
                     { name: 'REPAIR.pdf', type: 'Reparaci\xF3n' }]
     },
     {
-        category: 'Poliuretano',    
+        category: 'Poliuretano',
                 model: 'E-10',
                 brand: 'Graco',
                 premodel: 'Reactor',
@@ -1156,10 +1143,10 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                                   }
                                 ],
                 documents: [
-                    { name: 'FLYER.pdf', type: 'Detalles' }, 
+                    { name: 'FLYER.pdf', type: 'Detalles' },
                     { name: 'REPAIR.pdf', type: 'Reparaci\xF3n' }]
             },{
-        category: 'PoliUrea',    
+        category: 'PoliUrea',
                 model: 'E-10',
                 brand: 'Graco',
                 premodel: 'Reactor',
@@ -1284,11 +1271,11 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                                   }
                                 ],
                 documents: [
-                    { name: 'FLYER.pdf', type: 'Detalles' }, 
+                    { name: 'FLYER.pdf', type: 'Detalles' },
                     { name: 'REPAIR.pdf', type: 'Reparaci\xF3n' }]
             },
             {
-                category: 'Poliuretano',    
+                category: 'Poliuretano',
                 model: 'E-20',
                 brand: 'Graco',
                 premodel: 'Reactor',
@@ -1394,12 +1381,12 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                                 "precio":23250
                               }],
                 documents: [
-                    { name: 'FLYER.pdf', type: 'Detalles' }, 
+                    { name: 'FLYER.pdf', type: 'Detalles' },
                     { name: 'REPARACION.pdf', type: 'Reparaci\xF3n' }]
-            
+
             },
             {
-                category: 'Poliuretano',    
+                category: 'Poliuretano',
                 model: 'E-30',
                 brand: 'Graco',
                 premodel: 'Reactor2',
@@ -1474,13 +1461,13 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                         "precio":31470
                       }],
                 documents: [
-                    { name: 'FLYER.pdf', type: 'Detalles' }, 
-                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' }, 
+                    { name: 'FLYER.pdf', type: 'Detalles' },
+                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' },
                     { name: 'REPARACION.pdf', type: 'Reparaci\xF3n' }]
-            
+
             },
             {
-                category: 'PoliUrea',    
+                category: 'PoliUrea',
                 model: 'A-XP1',
                 brand: 'Graco',
                 premodel: 'Reactor',
@@ -1495,27 +1482,27 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                   type:'Sistema estandar',
                   description:'Presion maxima de trabajo 3500 psi (240 bar, 24.0 MPa) Consumo de aire 50 scfm @100 psi. Temperatura maxima de calientamiento del Fluido 170˚F (77˚C). Caudal de salida de material 1.5Gl (5.7L/min).La maquina puede operar a 230V 1-ph — 56A; 230V 3-ph — 46A; 380V 3-ph — 26A Longitud maxima de mangueras 210 ft (64 m).'
                 }],
-                customization:[{clave: 'Solo Equipo', 
+                customization:[{clave: 'Solo Equipo',
                                 caption: 'Solo Equipo',
                                 codigo: '24Y165',
                                 type:'Sistema estandar',
                                 precio: 14000 },
-                                {clave: 'Paquete AP', 
+                                {clave: 'Paquete AP',
                                 codigo: 'APY165',
                                 type:'Sistema estandar',
                                 caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 precio: 19110 },
-                                {clave: 'Paquete P2', 
+                                {clave: 'Paquete P2',
                                 codigo: 'P2Y165',
                                 type:'Sistema estandar',
                                 caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2',
                                 precio: 19610 }],
                 documents: [
                     { name: 'OPERATION.pdf', type: 'Funci\xF3n' }]
-            
+
             },
             {
-                category: 'Poliuretano',    
+                category: 'Poliuretano',
                 model: 'H-40',
                 brand: 'Graco',
                 premodel: 'Reactor2',
@@ -1654,12 +1641,12 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                           }
                         ],
                 documents: [
-                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' }, 
+                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' },
                     { name: 'REPAIR.pdf', type: 'Reparaci\xF3n' }]
-            
+
             },
             {
-                category: 'Poliuretano',    
+                category: 'Poliuretano',
                 model: 'H-50',
                 brand: 'Graco',
                 premodel: 'Reactor',
@@ -1735,7 +1722,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                             "precio":45150
                           },
                           {
-                            "clave":"Solo Equipo", 
+                            "clave":"Solo Equipo",
                             "caption":"Solo Equipo",
                             "codigo":"17H056",
                             type: 'Calentador 20.4 kW. 400 volts, 3 fases, 53A |  Sistema Estandar',
@@ -1792,12 +1779,12 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                           }
                         ],
                 documents: [
-                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' }, 
+                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' },
                     { name: 'REPAIR.pdf', type: 'Reparaci\xF3n' }]
-            
+
             },
             {
-                category: 'PoliUrea',    
+                category: 'PoliUrea',
                 model: 'E-10hp',
                 brand: 'Graco',
                 premodel: 'Reactor',
@@ -1860,12 +1847,12 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                           }
                         ],
                 documents: [
-                    { name: 'FLYER.pdf', type: 'Detalles' }, 
+                    { name: 'FLYER.pdf', type: 'Detalles' },
                     { name: 'REPAIR.pdf', type: 'Reparaci\xF3n' }]
-            
+
             },
             {
-                category: 'PoliUrea',   
+                category: 'PoliUrea',
                 model: 'E-XP1',
                 brand: 'Graco',
                 premodel: 'Reactor',
@@ -1886,61 +1873,61 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                   type: '400 Volts 3 fases, 24A',
                   description: 'Presion maxima de trabajo 2500 psi (172 bar, 17.2 MPa) . Temperatura maxima de calientamiento del Fluido 190˚F (88˚C). Caudal de salida de material 1.0Gl (3.8L/min). Longitud maxima de mangueras 210 ft (64 m).  Calentador de 10.2 kW'
                 }],
-                customization:[{caption: 'Solo Equipo', 
+                customization:[{caption: 'Solo Equipo',
                                 codigo: '259024',
                                 clave: 'Solo Equipo',
                                 type: '230 Volts 1 fase, 69A',
                                 precio: 19230 },
-                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'AP9024',
                                 clave: 'Paquete AP',
                                 type: '230 Volts 1 fase, 69A',
                                 precio: 24450 },
-                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2 ', 
+                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2 ',
                                 clave: 'Paquete P2',
                                 type: '230 Volts 1 fase, 69A',
                                 codigo: 'P29024',
                                 precio: 24970 },
 
-                                {caption: 'Solo Equipo', 
+                                {caption: 'Solo Equipo',
                                 codigo: '259033',
                                 clave: 'Solo Equipo',
                                 type: '230 Volts 3 fases, 43A',
                                 precio: 19230 },
-                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'AP9033',
                                 clave: 'Paquete AP',
                                 type: '230 Volts 3 fases, 43A',
                                 precio: 24450 },
-                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2 ', 
+                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2 ',
                                 clave: 'Paquete P2',
                                 type: '230 Volts 3 fases, 43A',
                                 codigo: 'P29033',
                                 precio: 24970 },
 
-                                {caption: 'Solo Equipo', 
+                                {caption: 'Solo Equipo',
                                 codigo: '259029',
                                 type: '400 Volts 3 fases, 24A',
                                 clave: 'Solo Equipo',
                                 precio: 19230 },
-                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'AP9029',
                                 type: '400 Volts 3 fases, 24A',
                                 clave: 'Paquete AP',
                                 precio: 24450 },
-                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2 ', 
+                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2 ',
                                 clave: 'Paquete P2',
                                 type: '400 Volts 3 fases, 24A',
                                 codigo: 'P29029',
                                 precio: 24970 }
                                 ],
                 documents: [
-                    { name: 'FLYER.pdf', type: 'Detalles' }, 
-                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' }, 
+                    { name: 'FLYER.pdf', type: 'Detalles' },
+                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' },
                     { name: 'REPARACION.pdf', type: 'Reparaci\xF3n' }]
 
             }, {
-                category: 'PoliUrea',   
+                category: 'PoliUrea',
                 model: 'E-XP2',
                 brand: 'Graco',
                 premodel: 'Reactor2',
@@ -1958,66 +1945,66 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                   type: 'Sistema Ellite, Incluye Graco Insite',
                   description: 'Presion maxima de trabajo 3500 psi (240 bar, 24.0 MPa) . Temperatura maxima de calientamiento del Fluido 190˚F (88˚C). Caudal de salida de material 2.0Gl (7.6L/min).  Longitud maxima de mangueras 310 ft (94 m). Calentador de 15.3 kW. Configuracion electrica ajustable a 230 volts 1 fase (100A), 230 volts 3 fase (59A), 400 volts 3 fase  35 A.'
                 }],
-                customization:[{caption: 'Solo Equipo', 
+                customization:[{caption: 'Solo Equipo',
                                 codigo: '272012',
                                 clave: 'Solo Equipo',
                                 type: 'Configuración Estandar',
                                 precio: 25430 },
-                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'AP2012',
                                 clave: 'Paquete AP',
                                 type: 'Configuración Estandar',
                                 precio: 30860 },
-                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2', 
+                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2',
                                 codigo: 'P22012',
                                 clave: 'Paquete P2',
                                 type: 'Configuración Estandar',
                                 precio: 31380 },
-                                {caption: 'Incluye: Multiples mangueras de  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Multiples mangueras de  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'AH2012',
                                 clave: 'Paquete AH',
                                 type: 'Configuración Estandar',
                                 precio: 41610 },
-                                {caption: 'Incluye: Multiples mangueras de 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2', 
+                                {caption: 'Incluye: Multiples mangueras de 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2',
                                 codigo: 'PH2012',
                                 clave: 'Paquete PH',
                                 type: 'Configuración Estandar',
                                 precio: 41210 },
 
-                                {caption: 'Solo Equipo', 
+                                {caption: 'Solo Equipo',
                                 codigo: '272112',
                                 clave: 'Solo Equipo',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 27590 },
-                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'AP2112',
                                 clave: 'Paquete AP',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 33030 },
-                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2', 
+                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2',
                                 codigo: 'P22112',
                                 clave: 'Paquete P2',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 33540 },
-                                {caption: 'Incluye: Multiples mangueras de  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Multiples mangueras de  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'AH2112',
                                 clave: 'Paquete AH',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 43770 },
-                                {caption: 'Incluye: Multiples mangueras de 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2', 
+                                {caption: 'Incluye: Multiples mangueras de 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2',
                                 codigo: 'PH2112',
                                 clave: 'Paquete PH',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 44290 }],
                 documents: [
-                    { name: 'FLYER.pdf', type: 'Detalles' }, 
-                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' }, 
+                    { name: 'FLYER.pdf', type: 'Detalles' },
+                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' },
                     { name: 'REPARACION.pdf', type: 'Reparaci\xF3n' }]
 
             },
-            
+
             {
-                category: 'Poliuretano',   
+                category: 'Poliuretano',
                 model: 'E-30i',
                 brand: 'Graco',
                 premodel: 'Reactor2',
@@ -2063,13 +2050,13 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                           }
                         ],
                 documents: [
-                    { name: 'FLYER.pdf', type: 'Detalles' }, 
-                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' }, 
+                    { name: 'FLYER.pdf', type: 'Detalles' },
+                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' },
                     { name: 'REPARACION.pdf', type: 'Reparaci\xF3n' }]
 
             },
             {
-                category: 'PoliUrea',   
+                category: 'PoliUrea',
                 model: 'E-XP2i',
                 brand: 'Graco',
                 premodel: 'Reactor2',
@@ -2084,24 +2071,24 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                   type: 'Configuración Estandar',
                   description: 'Presion maxima de trabajo 3500 psi (240 bar, 24.0 MPa). Temperatura maxima del fluido 88°C (190°F). Compresor Hydrovane 5 hp, 16 scfm, 240 volts, 1 fase 60 Hz, Secador de Aire: Hakinson Refrigerado 22 scfm, 115 volts, 1 fase, 60 hz, Motor: Perkins 404-22G, 2.2L,  29HP, Generador: Mecc Alte 22kW, 240 volts, 1 fase, 60 Hz'
                 }],
-                customization:[{caption: 'Caudal de salida del material 2.0 gal (7.6L/min). Longitud maxima de manguera 310 ft (94 m).', 
+                customization:[{caption: 'Caudal de salida del material 2.0 gal (7.6L/min). Longitud maxima de manguera 310 ft (94 m).',
                                 codigo: '272091',
                                 clave: 'Solo Equipo',
                                 type: 'Configuración Estandar',
                                 precio: 70740 },
-                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 2000psi; Maguera flexible 3 mts 1/4" DI presion de trabajo 2000 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 2000psi; Maguera flexible 3 mts 1/4" DI presion de trabajo 2000 Psi;  Pistola Fussion AP ',
                                 codigo: 'AP2091',
                                 clave: 'Paquete AP',
                                 type: 'Configuración Estandar',
                                 precio: 76170 },
-                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 2000psi; Maguera flexible 3 mts 1/4" presion de trabajo 2000 Psi;  Pistola Probler P2', 
+                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 2000psi; Maguera flexible 3 mts 1/4" presion de trabajo 2000 Psi;  Pistola Probler P2',
                                 codigo: 'P22091',
                                 clave: 'Paquete P2',
                                 type: 'Configuración Estandar',
                                 precio: 76690 }],
                 documents: [
-                    { name: 'FLYER.pdf', type: 'Detalles' }, 
-                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' }, 
+                    { name: 'FLYER.pdf', type: 'Detalles' },
+                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' },
                     { name: 'REPARACION.pdf', type: 'Reparaci\xF3n' }]
 
             },
@@ -2111,7 +2098,7 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                 brand: 'Graco',
                 premodel: 'Reactor2',
                 type: 'Hidr\xE1ulico',
-                
+
                 caption: 'Los dosificadores hidr\xE1ulicos de recubrimientos H-XP2 y H-XP3 fueron dise\xF1ados para aplicar poliurea y otros recubrimientos a presiones altas. En aplicaciones de suministro alto, entregan potencia y desempe\xF1o superiores, hasta 10.6 litros por minuto. El control de temperatura responde r\xE1pidamente, mantieniendo los valores prefijados incluso a caudales m\xE1ximos.',
                 parameters: [
                     { Param: '\xEDndice Potencia', Value: 1.35*207*((0.00127) * 100), inText: 'Presi\xF3n M\xE1xima', inVal: 3500 },
@@ -2125,63 +2112,63 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                   type: 'Sistema Ellite, Incluye Graco Insite',
                   description: 'Presion maxima de trabajo 3500 psi (240 bar, 24.0 MPa). Presion minima de trabajo 1200psi (83 bar, 8.3 MPa)Temperatura maxima de calientamiento del Fluido 190˚F (88˚C). Caudal de salida de material 1.5gal (5.7L/min).  Longitud maxima de mangueras 310 ft (94 m). Calentador de 15.3 kW. Configuracion electrica ajustable a 230 volts 1 fase (100A), 230 volts 3 fase (59A), 400 volts 3 fase  35 A.'
                 }],
-                customization:[{caption: 'Solo Equipo', 
+                customization:[{caption: 'Solo Equipo',
                                 codigo: '17H062',
                                 clave: 'Solo Equipo',
                                 type: 'Configuración Estandar',
                                 precio: 29500 },
-                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'APH062',
                                 clave: 'Paquete AP',
                                 type: 'Configuración Estandar',
                                 precio: 34720 },
-                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2', 
+                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2',
                                 codigo: 'P2H062',
                                 clave: 'Paquete P2',
                                 type: 'Configuración Estandar',
                                 precio: 35240 },
-                                {caption: 'Incluye: Multiples mangueras de  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Multiples mangueras de  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'AHH062',
                                 clave: 'Paquete AH',
                                 type: 'Configuración Estandar',
                                 precio: 44540 },
-                                {caption: 'Incluye: Multiples mangueras de 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2', 
+                                {caption: 'Incluye: Multiples mangueras de 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2',
                                 codigo: 'PHH062',
                                 clave: 'Paquete PH',
                                 type: 'Configuración Estandar',
                                 precio: 45070 },
 
-                                {caption: 'Solo Equipo', 
+                                {caption: 'Solo Equipo',
                                 codigo: '17H162',
                                 clave: 'Solo Equipo',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 31070 },
-                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'APH162',
                                 clave: 'Paquete AP',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 36500 },
-                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2', 
+                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2',
                                 codigo: 'P2H162',
                                 clave: 'Paquete P2',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 37020 },
-                                {caption: 'Incluye: Multiples mangueras de  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Multiples mangueras de  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'AHH162',
                                 clave: 'Paquete AH',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 47240 },
-                                {caption: 'Incluye: Multiples mangueras de 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2', 
+                                {caption: 'Incluye: Multiples mangueras de 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2',
                                 codigo: 'PHH162',
                                 clave: 'Paquete PH',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 47760 }],
                 documents: [
-                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' }, 
+                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' },
                     { name: 'REPAIR.pdf', type: 'Reparaci\xF3n' }]
             },
             {
-                category: 'PoliUrea',    
+                category: 'PoliUrea',
                 model: 'H-XP3',
                 brand: 'Graco',
                 premodel: 'Reactor2',
@@ -2199,61 +2186,61 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
                   type: 'Sistema Ellite, Incluye Graco Insite',
                   description: 'Presion maxima de trabajo 3500 psi (240 bar, 24.0 MPa). Presion minima de trabajo 1200psi (83 bar, 8.3 MPa). Temperatura maxima de calientamiento del Fluido 190˚F (88˚C). Caudal de salida de material 1.5gal (5.7L/min).  Longitud maxima de mangueras 310 ft (94 m). Calentador de 15.3 kW. Configuracion electrica ajustable a 230 volts 1 fase (100A), 230 volts 3 fase (59A), 400 volts 3 fase  35 A.'
                 }],
-                customization:[{caption: 'Solo Equipo', 
+                customization:[{caption: 'Solo Equipo',
                                 codigo: '17H074',
                                 clave: 'Solo Equipo',
                                 type: 'Configuración Estandar',
                                 precio: 37240 },
-                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'APH074',
                                 clave: 'Paquete AP',
                                 type: 'Configuración Estandar',
                                 precio: 42460 },
-                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2', 
+                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2',
                                 codigo: 'P2H074',
                                 clave: 'Paquete P2',
                                 type: 'Configuración Estandar',
                                 precio: 42980 },
-                                {caption: 'Incluye: Multiples mangueras de  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Multiples mangueras de  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'AHH074',
                                 clave: 'Paquete AH',
                                 type: 'Configuración Estandar',
                                 precio: 54740 },
-                                {caption: 'Incluye: Multiples mangueras de 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2', 
+                                {caption: 'Incluye: Multiples mangueras de 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2',
                                 codigo: 'PHH074',
                                 clave: 'Paquete PH',
                                 type: 'Configuración Estandar',
                                 precio: 55260 },
 
-                                {caption: 'Solo Equipo', 
+                                {caption: 'Solo Equipo',
                                 codigo: '17H174',
                                 clave: 'Solo Equipo',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 38780 },
-                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Manguera  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'APH174',
                                 clave: 'Paquete AP',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 44210 },
-                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2', 
+                                {caption: 'Incluye: Manguera 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2',
                                 codigo: 'P2H174',
                                 clave: 'Paquete P2',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 44730 },
-                                {caption: 'Incluye: Multiples mangueras de  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ', 
+                                {caption: 'Incluye: Multiples mangueras de  15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" DI presion de trabajo 3500 Psi;  Pistola Fussion AP ',
                                 codigo: 'AHH174',
                                 clave: 'Paquete AH',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 57640 },
-                                {caption: 'Incluye: Multiples mangueras de 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2', 
+                                {caption: 'Incluye: Multiples mangueras de 15 mts 3/8" presion de trabajo 3500psi; Manguera flexible 3 mts 1/4" presion de trabajo 3500 Psi;  Pistola Probler P2',
                                 codigo: 'PHH174',
                                 clave: 'Paquete PH',
                                 type: 'Sistema Ellite, Incluye Graco Insite',
                                 precio: 58160 }],
                 documents: [
-                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' }, 
+                    { name: 'OPERATION.pdf', type: 'Funci\xF3n' },
                     { name: 'REPAIR.pdf', type: 'Reparaci\xF3n' }]
-            
+
             }
         ];
         $scope.equipos = this.equipos;
@@ -2263,11 +2250,11 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
     // for manually overriding controller specific variables with
     // possible conflicting names with other controllers
 
-    
+
 
     //Stablish Post, Saved via route.js's Api to Mongoose "postEquip()" function
     // $scope.formData = {} clear the form so our user is ready to enter another
-    
+
     //===!==== MODIFY FOR api/equipo POSTING
   //  getEquipment();
         //  function getEquipment() { $http.get('/api/equipos').success(function (data) { $scope.equipos = data; }); }    ;
@@ -2275,12 +2262,12 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
   for(var i=0; i < this.equipos.length; i++) {
     //console.log(this.equipos[i].model);
 }
-        
+
    $scope.postEquipment = function () {
         //formData might need to differ in name
         $http.post('/api/equipos', $scope.formData).success(function (data) {$scope.formData = {}; $scope.equipos = data; }).error(function (data) {console.log('Error: ' + data);});
     };
-    
+
 
     //Stablish Delete
 
@@ -2295,6 +2282,6 @@ EquipCtrl.controller('EquipmentController',['$resource','$scope', '$cookies', '$
             console.log('Error: ' + data);
         });
     };
-     
- 
+
+
 }]);//END OF NerdController

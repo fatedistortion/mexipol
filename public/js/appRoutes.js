@@ -16,7 +16,7 @@ angular.module('appRoutes', [])
             controller: 'MainController as Main' //Setting Alias
         })
         .when('/main', {
-
+            title: '',
             templateUrl: 'views/home.html',
             controller: 'MainController as Main'
         })
@@ -178,8 +178,6 @@ angular.module('appRoutes', [])
         })
         .when('/quimicos', {
             title: '- Quimicos',
-            //    templateUrl: 'views/home.html',
-            //controller: 'MainController as Main'
             templateUrl: 'views/quim.html',
             controller: 'chemController as Quimicos'
         //Aliases can be stated same as in ng-controller

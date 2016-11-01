@@ -563,78 +563,53 @@ module.exports = function (app, Nerd, Geek, Potential, Account, Task) {
 
 	// frontend routes =========================================================
     var hostHeader = function(reqHeader){
-       if((reqHeader == 'mexipol.com.mx') || (reqHeader == 'www.mexipol.com.mx')
-       || (reqHeader == 'localhost:8080')) {
-        return true
-       } else {
+        if((reqHeader == 'mexipol.com.mx') || (reqHeader == 'www.mexipol.com.mx') || (reqHeader == 'localhost:8080')) {
+            return true
+        }
+
         return false
-       }
     }
     // route to handle all angular requests
 
     app.get('/robots.txt', function (req, res) {
         res.sendfile('./public/robots.txt');
-        console.log('sending robots.txt');
     });
     app.get('/testJson', function (req, res) {
-
         res.json(jsonF);
-
-        })
+    })
     app.get(/sitemap|sitemap.xml/, function (req, res) {
         res.sendfile('./public/sitemap.xml');
-        console.log('sending sitemap');
     });
-
     app.get(/quimicos/, function (req, res) {
-        if (hostHeader(req.header('host')))
-            res.sendfile('./public/index.html');
-        else
-            res.status(404)
-            .send('Not valid Host');
+        res.sendfile('./public/index.html');
     });
     app.get(/equipos/, function (req, res) {
-       if (hostHeader(req.header('host')))
-            res.sendfile('./public/index.html');
-        else
-            res.status(404);
+        res.sendfile('./public/index.html');
     });
     app.get(/aplicaciones/, function (req, res) {
-        if (hostHeader(req.header('host')))
-            res.sendfile('./public/index.html');
-        else
-            res.status(404)
-            .send('Not valid Host');
+        res.sendfile('./public/index.html');
     });
     app.get(/asistencia/, function (req, res) {
-        if (hostHeader(req.header('host')))
-            res.sendfile('./public/index.html');
-        else
-            res.status(404)
-            .send('Not valid Host');
+        res.sendfile('./public/index.html');
     });
     app.get(/eventos/, function (req, res) {
-        if (hostHeader(req.header('host')))
-            res.sendfile('./public/index.html');
-        else
-            res.status(404)
-            .send('Not valid Host');
+        res.sendfile('./public/index.html');
+    });
+    app.get('/main', function (req, res) {
+        res.sendfile('./public/index.html');
+    });
+    app.get('/crm', function (req, res) {
+        res.sendfile('./public/index.html');
+    });
+    app.get('/api/crm', function (req, res) {
+        Nerd.find(function (err, nerds) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(nerds); // return all nerds in JSON format
+        });
     });
 
-    app.get('/main', function (req, res) {
-        if (hostHeader(req.header('host')))
-            res.sendfile('./public/index.html');
-        else
-            res.status(404)
-            .send('Not valid Host');
-    });
-    app.get(/nerds/, function (req, res) {
-        if (hostHeader(req.header('host')))
-            res.sendfile('./public/index.html');
-        else
-            res.status(404)
-            .send('Not valid Host');
-    });
     app.get('*', function (req, res) {
         console.log(req.header('host'));
         if (hostHeader(req.header('host')))
@@ -642,30 +617,5 @@ module.exports = function (app, Nerd, Geek, Potential, Account, Task) {
         else
             res.status(404)
             .send('Not valid Host');
-    });
-    app.get('/crm', function (req, res) {
-        if (hostHeader(req.header('host')))
-            res.sendfile('./public/index.html');
-        else
-            res.status(404)
-            .send('Not valid Host');
-    });
-
-    // === CRM SPECIFIC API
-     app.get('/api/crm', function (req, res) {
-        // use mongoose to get all nerds in the database
-        if (hostHeader(req.header('host'))){
-        Nerd.find(function (err, nerds) {
-
-            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-            if (err)
-                res.send(err);
-
-            res.json(nerds); // return all nerds in JSON format
-        });
-    }else{
-        res.status(404)
-            .send('Not valid Host');
-    }
     });
 };

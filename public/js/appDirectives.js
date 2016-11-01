@@ -2,11 +2,11 @@ var dir = angular.module('appDirectives', []);
 
 /*
  * Calling the background directive will templeate CSS accrding to atribute values of an element
- * Directive filtering in angular eliminates "x-" to "x" hence the attribute backImg must be 
+ * Directive filtering in angular eliminates "x-" to "x" hence the attribute backImg must be
  * written in the elemnt's DOM as:
- *              
- *                  back-Img:"http://{{$SCOPE_ELEMENT}}/or_STATIC_ELEMENT" 
- * 
+ *
+ *                  back-Img:"http://{{$SCOPE_ELEMENT}}/or_STATIC_ELEMENT"
+ *
  * http://jsfiddle.net/BinaryMuse/aSjwk/2/
  */
 dir.directive('backImg', function () {
@@ -23,7 +23,7 @@ dir.directive('analytics', function () {
     return {
         restrict: 'E', //Restrict for Element
         templateUrl: '/templates/analytics.html' //Url accessed from public folder
-        
+
     };
 });
 dir.directive('postsection', function () {
@@ -31,7 +31,7 @@ dir.directive('postsection', function () {
         restrict: 'E', //Restrict for Element
         controller: 'FacebookControl as Facebook',
         templateUrl: '/templates/newssection.html' //Url accessed from public folder
-        
+
     };
 });
 dir.directive('hotBanner', function () {
@@ -43,16 +43,16 @@ dir.directive('hotBanner', function () {
             // use date parser to access simposium htmls
                 if((date.getMonth()>4)&&(date.getYear()>115)){
                     // After April 2016 use normal banner
-                    return '/templates/hero1'+'.html';
+                    return '/templates/hero'+'.html';
                 }else if((date.getMonth()<4)&&(date.getYear()>115)){
                     // Before April 2016 use simposium
                     return '/templates/poster2.html';
                 }else{
                     // Use default hero
-                    return '/templates/hero1'+'.html';
+                    return '/templates/hero'+'.html';
                 }
             } //Url accessed from public folder
-        
+
     };
 });
 

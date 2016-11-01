@@ -1,6 +1,5 @@
 
 body { padding-top:60px; overflow-x: hidden}
-.logo{max-height:90%; width:auto;}
 #poster{font-family:'Dosis', sans-serif !important;}
 #poster2{font-family:'Dosis', sans-serif !important; background-image: url(/docs/posters/background.jpg); overflow-x:hidden;}
 div#poster div, div#poster section{font-size:140%; z-index:9; position: relative;}
@@ -28,6 +27,157 @@ section#logoFoot {margin-top:-32px; min-height:10em;}
 section#logoFoot img{max-width:100%; max-height: 100%}
 div#shopModal.in, div#myModal.in, div#myModal2.in, div#myModal3.in, div#myModal4.in, div#myModal5.in{
     display:block;
+}
+/** ==================== **/
+/** ==== Navigation ==== **/
+/** ==================== **/
+
+.navbar img {
+    height: 50px;
+    width: auto;
+    margin: 0;
+}
+
+.navbar .navbar-header img {
+    margin-top: 10px;
+    padding-right: 20px;
+}
+
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:hover,
+.dropdown-menu>li>a:focus,
+.dropdown-menu>li>a:hover {
+    color: #49A9D1;
+}
+
+.navbar a.graphic {
+    margin: 0;
+    padding: 0 15px;
+    top: 10px;
+}
+
+.navbar a.graphic img {
+    height: 39px;
+    width: auto;
+    padding: 0;
+}
+
+.navbar button {
+    float: right;
+    top: 10px;
+    position: relative;
+}
+
+/** == Contact Overlay == **/
+
+.contact {
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    right: -370px;
+    overflow: hidden;
+    width: 370px;
+    height: 100%;
+    background: white;
+    -webkit-transition: -webkit-transform 0.3s, width 0.3s;
+    -moz-transition: -moz-transform 0.3s, width 0.3s;
+    -o-transition: transform 0.3s, width 0.3s;
+    transition: transform 0.3s, width 0.3s;
+    overflow-y: hidden;
+}
+
+.contact h2 {
+    color: #353535;
+}
+
+.contact a {
+    cursor: pointer;
+}
+
+.contact a, .contact p {
+    margin: 0;
+    padding: 0;
+}
+
+.contact-active > .contact-mask{
+    width:600px;
+    display:block;
+}
+
+.contact-mask{
+    position: inherit;
+    top: 0;
+    bottom: 0;
+    right: 370px;
+    width: 2px;
+    height: 100%;
+    background: transparent;
+    z-index: 12000;
+    display:none;
+}
+
+input.ng-invalid.ng-pristine, textarea.ng-invalid.ng-pristine{
+    background:rgb(252, 229, 169);
+}
+input.ng-dirty.ng-invalid{
+    background:rgba(200, 15, 15, 0.32);
+}
+input.ng-dirty.ng-valid{
+    background:linear-gradient(45deg, rgba(97, 105, 115, 0.86) -20%,rgba(5, 171, 224, 0.19) 100%);
+    color:whitesmoke;
+}
+textarea.ng-dirty.ng-valid{background:linear-gradient(45deg, rgba(97, 105, 115, 0.86) -20%,rgba(5, 171, 224, 0.19) 100%);
+    color:whitesmoke;}
+input.ng-invalid{
+    background:rgba(200, 15, 15, 0.32);
+}
+
+.contact-active {
+    -webkit-transform: translateX(-370px);
+    -moz-transform: translateX(-370px);
+    -ms-transform: translateX(-370px);
+    -o-transform: translateX(-370px);
+    transform: translateX(-370px);
+}
+
+img.avatar {
+    height: 6em !important;
+    margin: 1em 0 0 0 !important;
+}
+
+legend.contactLegend {
+    left: 5px;
+    top: -24px;
+    float:left;
+    width:auto !important;
+    position: relative;
+    line-height: normal;
+    background: white;
+    padding: 0 7px;
+}
+
+div.contact div,line {
+    float:left
+}
+div.contact line {
+    width: calc(100% - 32px);
+    background: linear-gradient(45deg, #5f6f81 0%,#05ABE0 100%);
+    margin-left: 16px;
+    margin-right: 16px;
+    height: 1px;
+}
+
+.nav-pills > li {
+    padding: 0;
+}
+
+.nav-pills>li+li {
+    margin-left: auto;
+}
+
+.nav-pills>li>a {
+    font-size: 1.12em;
+    text-align: center;
 }
 
 .label-text {
@@ -573,15 +723,12 @@ div.whole{
     min-height: 220px;
 }
 address {
-    width:40%;
     padding: 20px 0px 20px 10%;
     line-height: 2.5em;
     font-family:'Lato',sans-serif;
     color:#f5faff;
     float: left;
-    margin-bottom:0px !important;
     font-weight:300;
-    /* min-height: 205px; */
 }
 footer img{
     width: auto;
@@ -598,42 +745,24 @@ postsection img.sign{
     bottom:14px;
     left:14px;
 }
-footer #seals div:last-child img{
-    margin-bottom:10px;
-    margin-top: 15px;
+
+.footSelect {
+    border:solid #445 1px;
+    border-radius:4px;
+    padding: 0;
 }
-.footSelect{
-    border-top:solid #445 1px;
-    border-left: solid #445 1px;
-    border-top-left-radius:4px;
+
+.footSelect h4 {
+    margin: 5px 0;
 }
+
 div.smaller h5 {
     margin-top: 5px;
 }
 div.smaller2 h5 {
     margin-top: 5px;
 }
-div.footSelect:before {
-    content: "Equipos";
-    position: absolute;
-    left: -16px;
-    border-top-right-radius: 4px;
-    padding: 0 4px;
-    top: 13px;
-    text-align: right;
-    -ms-transform: rotate(-90deg); /* IE 9 */
-    -webkit-transform: rotate(-90deg); /* Safari */
-    transform: rotate(-90deg);
-    background: rgb(68, 68, 85);
-    color: white;
-    font-size: 12px;
-}
-div.footSelect.footQuim:before {
-    content: "Quimicos" !important;
-    left: -18px;
-    top: 17px;
 
-}
 .loginError {
     color: #DE2F2F;
     font-size: 16px;
@@ -654,31 +783,84 @@ div.footSelect.footQuim:before {
 .cotHead h1 {
     border-bottom: 1px solid #C1C1C1;
 }
+
+/** ============= **/
+/** ==== PDP ==== **/
+/** ============= **/
+
+.container.pdp {
+    margin-top: 1%;
+}
+
+.docs img {
+    width: 3.5em;
+}
+
+/** Thumbnails **/
 .thumbnail {
     border: 1px solid transparent;
 }
-a.thumbnail{cursor: pointer;}
-
-.thumbnail>img, .thumbnail a>img{
-    min-height:30px;
+a.thumbnail {
+    cursor: pointer;
 }
-.thumbnail a.active>img{
-
+a.thumbnail.active {
+    background-color: #fff;
+    color: #337ab7;
 }
-.thumbnail > img.active{
+
+a.thumbnail.active h3 {
+    font-weight: bold;
+}
+
+.thumbnail>img, .thumbnail a>img {
+    height: 70px;
+}
+.thumbnail > img.active {
     min-height:30px;
     filter: saturate(150%);
     -webkit-filter: saturate(150%);
 }
-.thumbnail > img.passive{
+.thumbnail > img.passive {
     min-height:30px;
     filter: grayscale(75%);
     -webkit-filter: grayscale(75%);
     opacity:.7;
 }
+
+.nav-tabs>li.active>a {
+    color: #337ab7;
+    font-weight: bold;
+}
+
+h2.off {
+    font-size:1.5em;
+}
+span.ribbon.Reactor2 {
+    background: #DF7B6E;
+}
+span.ribbon.Reactor {
+    background: #337AB7;
+}
+span.ribbon.Fusion {
+    background: #9D9D9D;
+}
+span.ribbon.Probler {
+    background: #242525;
+}
+
+/** Homepage **/
+.jumbotron {
+    padding: 1%;
+    margin: 0;
+    background-position-y: 35%;
+    background-size: cover;
+}
 .jumbotron h1{
     color:rgba(255, 255, 255, 0.64);
+    margin: 0;
+    font-size: 4em;
 }
+
 ul.notificationList{
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
@@ -1018,20 +1200,9 @@ min-width: -webkit-min-content;
     .mainJumbo{
         background-position-x: 58%;
     }
-    .line {
-        /*opacity:0*/
 
-    }
-    .line2 {
-
-    }
-    footer #seals div:last-child img, footer img{
-    width: auto;
-    padding: 4% !important;
-    max-height: 80px;
-    margin-top: 0px;
-    margin-bottom: 40px;
-    margin-left: 19%;
+    footer #seals {
+        margin-bottom: 4%;
     }
 }
 @media (min-width:768px) {
